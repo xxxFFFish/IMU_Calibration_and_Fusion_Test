@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="IMU_Calibration_and_Fusion_Test"
+run/main_scene="uid://q28nws4uwvdt"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
+
+[debug]
+
+settings/stdout/verbose_stdout=true
 
 [rendering]
 

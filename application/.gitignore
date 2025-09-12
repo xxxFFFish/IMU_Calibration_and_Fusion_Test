@@ -1,3 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+# Gdextension lib
+bin/*.dll
+bin/*.a
