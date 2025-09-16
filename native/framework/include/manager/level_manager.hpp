@@ -29,8 +29,8 @@ public:
     void _ready() override;
     void _exit_tree() override;
 
-// Private Properties
 private:
+    // Properties
     Ref<PackedScene> m_main_level_packed_scene;
 
 public:

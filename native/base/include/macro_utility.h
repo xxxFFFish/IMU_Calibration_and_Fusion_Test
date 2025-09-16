@@ -53,6 +53,41 @@ namespace godot {
         } \
     }
 
+#define GET_AND_INIT_BUTTON_PROPERTY(name, var_name, label_key, pressed_handler_name) \
+    Variant var_##name = this->get(#name); \
+    if (var_##name.get_type() != Variant::OBJECT) { \
+        print_error(TAG#name" was not found!"); \
+    } else { \
+        var_name = Object::cast_to<Button>(var_##name); \
+        if (unlikely(!var_name)) { \
+            print_error(TAG#name" is null!"); \
+        } else {\
+            var_name->set_text( \
+                framework::TextManager::get_instance()->get_gui_text_key( \
+                    framework::EGuiText::label_key \
+                ) \
+            ); \
+            if (var_name->connect( \
+                "pressed", callable_mp(this, &pressed_handler_name)) != Error::OK) { \
+                print_error(TAG"Connect "#name" signal pressed failed!"); \
+            } \
+        } \
+    }
+
+#define CONNECT_FRAMEWORK_SIGNAL(name, handler_name) \
+    if (framework::SignalManager::get_instance()->signal_connect( \
+        framework::ESignal::name, \
+        callable_mp(this, &handler_name) \
+    ) != Error::OK) { \
+        print_error(TAG"Connect signal "#name" failed!"); \
+    }
+
+#define DISCONNECT_FRAMEWORK_SIGNAL(name, handler_name) \
+    framework::SignalManager::get_instance()->signal_disconnect( \
+        framework::ESignal::name, \
+        callable_mp(this, &handler_name) \
+    );
+
 } // namespace godot
 
 #endif // __MACRO_UTILITY_H

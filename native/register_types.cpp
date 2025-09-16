@@ -15,6 +15,8 @@
 
 #include "level/main_level.hpp"
 
+#include "gui/level/main_canvas.hpp"
+
 using namespace godot;
 
 void initialize_module(ModuleInitializationLevel p_level) {
@@ -22,7 +24,8 @@ void initialize_module(ModuleInitializationLevel p_level) {
 		return;
 	}
 
-	// Autoload node
+// Autoload node
+	// Manager node
 	GDREGISTER_RUNTIME_CLASS(framework::ChiefManager);
 	GDREGISTER_RUNTIME_CLASS(framework::DataManager);
 	GDREGISTER_RUNTIME_CLASS(framework::TextManager);
@@ -30,7 +33,7 @@ void initialize_module(ModuleInitializationLevel p_level) {
 	GDREGISTER_RUNTIME_CLASS(framework::LevelManager);
 	GDREGISTER_RUNTIME_CLASS(framework::GuiManager);
 
-	// Scene node
+// Scene node
 	// Main node
 	GDREGISTER_RUNTIME_CLASS(Main);
 
@@ -38,6 +41,7 @@ void initialize_module(ModuleInitializationLevel p_level) {
 	GDREGISTER_RUNTIME_CLASS(MainLevel);
 
 	// GUI canvas node
+	GDREGISTER_RUNTIME_CLASS(MainCanvas);
 }
 
 void uninitialize_module(ModuleInitializationLevel p_level) {

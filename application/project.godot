@@ -28,6 +28,15 @@ GlobalGuiManager="*res://scene/autoload/gui_manager.tscn"
 
 settings/stdout/verbose_stdout=true
 
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://asset/text/gui_text.en_US.translation", "res://asset/text/gui_text.zh_CN.translation")
+
 [rendering]
 
 renderer/rendering_method="mobile"

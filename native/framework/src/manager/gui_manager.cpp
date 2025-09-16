@@ -70,5 +70,5 @@ CanvasLayer *GuiManager::instantiate_gui(EGuiCanvas gui) {
         default:;
     }
 
-    return cast_to<CanvasLayer>(instance);
+    return Object::cast_to<CanvasLayer>(instance);
 }

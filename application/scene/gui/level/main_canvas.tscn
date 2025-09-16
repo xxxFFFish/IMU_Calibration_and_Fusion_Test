@@ -1,0 +1,157 @@
+[gd_scene load_steps=6 format=3 uid="uid://beauwgpx52xxo"]
+
+[ext_resource type="Script" uid="uid://b3f11u2saqxg4" path="res://script/gui/level/main_canvas.gd" id="1_u0xvk"]
+[ext_resource type="Theme" uid="uid://j2khpauoooqn" path="res://theme/level/main_canvas_button.tres" id="2_mfywu"]
+
+[sub_resource type="Animation" id="Animation_u0xvk"]
+resource_name = "show"
+length = 2.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_mfywu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hxrk2"]
+_data = {
+&"RESET": SubResource("Animation_mfywu"),
+&"show": SubResource("Animation_u0xvk")
+}
+
+[node name="MainCanvas" type="MainCanvas" node_paths=PackedStringArray("start_calibration_button", "start_fusion_button", "option_button", "quit_button")]
+layer = 10
+script = ExtResource("1_u0xvk")
+start_calibration_button = NodePath("MarginContainer/VBoxContainer/StartCalibrationButton")
+start_fusion_button = NodePath("MarginContainer/VBoxContainer/StartFusionButton")
+option_button = NodePath("MarginContainer/VBoxContainer/OptionButton")
+quit_button = NodePath("MarginContainer/VBoxContainer/QuitButton")
+
+[node name="BackColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0.1, 0.2, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 100
+
+[node name="TitleLabel" type="RichTextLabel" parent="MarginContainer"]
+custom_minimum_size = Vector2(600, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 12
+theme_override_constants/shadow_offset_x = 16
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/normal_font_size = 160
+theme_override_font_sizes/bold_font_size = 160
+bbcode_enabled = true
+text = "[b]IMU[/b]"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+threaded = true
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+visible_characters_behavior = 2
+text_direction = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/TitleLabel"]
+libraries = {
+&"": SubResource("AnimationLibrary_hxrk2")
+}
+autoplay = "show"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/separation = 20
+
+[node name="StartCalibrationButton" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(280, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_mfywu")
+text = "START CALIBRATION"
+text_overrun_behavior = 3
+
+[node name="StartFusionButton" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(280, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_mfywu")
+text = "START FUSION"
+text_overrun_behavior = 3
+
+[node name="OptionButton" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(280, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_mfywu")
+text = "OPTION"
+text_overrun_behavior = 3
+
+[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(280, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_mfywu")
+text = "QUIT"
+text_overrun_behavior = 3

@@ -5,6 +5,10 @@
 
 namespace godot {
 
+namespace framework {
+struct ProcessData;
+} // namespace framework
+
 class Main : public Node {
     GDCLASS(Main, Node)
 
@@ -19,12 +23,18 @@ public:
     void _ready() override;
     void _exit_tree() override;
 
-// Private Properties
 private:
+    Node *mp_current_level_node = nullptr;
+    Node *mp_next_level_node = nullptr;
 
-// Pirvate Members
-private:
+    framework::ProcessData *mp_process_data = nullptr;
 
+    void parse_cmds();
+    void start_level();
+
+    // Signal handler
+    void on_process_quit();
+    void on_process_switch_level();
 };
 
 } // namespace godot

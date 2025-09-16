@@ -1,3 +1,7 @@
-[gd_scene format=3 uid="uid://c30ie40ft1csl"]
+[gd_scene load_steps=2 format=3 uid="uid://c30ie40ft1csl"]
+
+[ext_resource type="PackedScene" uid="uid://beauwgpx52xxo" path="res://scene/gui/level/main_canvas.tscn" id="1_2qxj7"]
 
 [node name="MainLevel" type="MainLevel"]
+
+[node name="MainCanvas" parent="." instance=ExtResource("1_2qxj7")]
