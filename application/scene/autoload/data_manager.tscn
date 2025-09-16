@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://7l171owkkj6u"]
+
+[node name="DataManager" type="DataManager"]

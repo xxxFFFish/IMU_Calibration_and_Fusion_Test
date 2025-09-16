@@ -15,6 +15,15 @@ run/main_scene="uid://q28nws4uwvdt"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GlobalChiefManager="*res://scene/autoload/chief_manager.tscn"
+GlobalDataManager="*res://scene/autoload/data_manager.tscn"
+GlobalTextManager="*res://scene/autoload/text_manager.tscn"
+GlobalLevelManager="*res://scene/autoload/level_manager.tscn"
+GlobalSignalManager="*res://scene/autoload/signal_manager.tscn"
+GlobalGuiManager="*res://scene/autoload/gui_manager.tscn"
+
 [debug]
 
 settings/stdout/verbose_stdout=true
