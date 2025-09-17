@@ -14,8 +14,12 @@
 #include "main/main.hpp"
 
 #include "level/main_level.hpp"
+#include "level/calibration_level.hpp"
 
 #include "gui/level/main_canvas.hpp"
+#include "gui/level/calibration_canvas.hpp"
+
+#include "gui/effect/transition_curtain_canvas.hpp"
 
 using namespace godot;
 
@@ -39,9 +43,13 @@ void initialize_module(ModuleInitializationLevel p_level) {
 
 	// Level node
 	GDREGISTER_RUNTIME_CLASS(MainLevel);
+	GDREGISTER_RUNTIME_CLASS(CalibrationLevel);
 
 	// GUI canvas node
 	GDREGISTER_RUNTIME_CLASS(MainCanvas);
+	GDREGISTER_RUNTIME_CLASS(CalibrationCanvas);
+
+	GDREGISTER_RUNTIME_CLASS(TransitionCurtainCanvas);
 }
 
 void uninitialize_module(ModuleInitializationLevel p_level) {

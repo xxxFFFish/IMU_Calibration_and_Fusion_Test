@@ -42,14 +42,55 @@ namespace godot {
     } \
     m_enabled = false;
 
+#define GET_RESOURCE_PROPERTY(name, var_name) \
+    Variant var_##name = this->get(#name); \
+    if (var_##name.get_type() != Variant::OBJECT) { \
+        print_error(TAG#name" was not found!"); \
+    } else { \
+        var_name = var_##name; \
+        if (var_name.is_null()) { \
+            print_error(TAG#name" is null!"); \
+        } \
+    }
+
 #define GET_PACKED_SCENE_PROPERTY(name, var_name, type_name) \
     Variant var_##name = this->get(#name); \
     if (var_##name.get_type() != Variant::OBJECT) { \
         print_error(TAG#name" was not found!"); \
     } else { \
         var_name = var_##name; \
-        if (var_name->get_state()->get_node_type(0) != type_name::get_class_static()) { \
+        if (unlikely(var_name.is_null())) { \
+            print_error(TAG#name" is null!"); \
+        } else if (var_name->get_state()->get_node_type(0) != type_name::get_class_static()) { \
             print_error(TAG#name" type error!"); \
+        } \
+    }
+
+#define GET_NODE_PROPERTY(name, var_name, type_name) \
+    Variant var_##name = this->get(#name); \
+    if (var_##name.get_type() != Variant::OBJECT) { \
+        print_error(TAG#name" was not found!"); \
+    } else { \
+        var_name = Object::cast_to<type_name>(var_##name); \
+        if (var_name == nullptr) { \
+            print_error(TAG#name" is null!"); \
+        } \
+    }
+
+#define GET_AND_INIT_LABEL_PROPERTY(name, var_name, label_key) \
+    Variant var_##name = this->get(#name); \
+    if (var_##name.get_type() != Variant::OBJECT) { \
+        print_error(TAG#name" was not found!"); \
+    } else { \
+        var_name = Object::cast_to<Label>(var_##name); \
+        if (unlikely(var_name == nullptr)) { \
+            print_error(TAG#name" is null!"); \
+        } else {\
+            var_name->set_text( \
+                framework::TextManager::get_instance()->get_gui_text_key( \
+                    framework::EGuiText::label_key \
+                ) \
+            ); \
         } \
     }
 
@@ -59,7 +100,7 @@ namespace godot {
         print_error(TAG#name" was not found!"); \
     } else { \
         var_name = Object::cast_to<Button>(var_##name); \
-        if (unlikely(!var_name)) { \
+        if (unlikely(var_name == nullptr)) { \
             print_error(TAG#name" is null!"); \
         } else {\
             var_name->set_text( \

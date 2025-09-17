@@ -1,3 +1,8 @@
-[gd_scene format=3 uid="uid://c83igpkjmw1an"]
+[gd_scene load_steps=3 format=3 uid="uid://c83igpkjmw1an"]
+
+[ext_resource type="Script" uid="uid://wp4lhphb840p" path="res://script/autoload/gui_manager.gd" id="1_uo5i0"]
+[ext_resource type="PackedScene" uid="uid://iys3u46vrvom" path="res://scene/gui/effect/transition_curtain_canvas.tscn" id="2_d7xrx"]
 
 [node name="GuiManager" type="GuiManager"]
+script = ExtResource("1_uo5i0")
+transition_curtain_canvas_packed_scene = ExtResource("2_d7xrx")

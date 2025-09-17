@@ -5,6 +5,8 @@
 
 namespace godot {
 
+class TransitionCurtainCanvas;
+
 namespace framework {
 struct ProcessData;
 } // namespace framework
@@ -29,12 +31,18 @@ private:
 
     framework::ProcessData *mp_process_data = nullptr;
 
+    TransitionCurtainCanvas *mp_transition_curtain_canvas = nullptr;
+
     void parse_cmds();
     void start_level();
+    void switch_level();
 
     // Signal handler
     void on_process_quit();
     void on_process_switch_level();
+
+    void on_curtain_close_finished();
+    void on_curtain_open_finished();
 };
 
 } // namespace godot

@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b0j25ksdbmtef"]
+
+[ext_resource type="Shader" uid="uid://cwj6kwoklf70n" path="res://material/gui/effect/transition_curtain_canvas/transition_curtain.gdshader" id="1_h8nc1"]
+
+[resource]
+shader = ExtResource("1_h8nc1")
+shader_parameter/Progress = 0.0
+shader_parameter/GridScale = Vector2(16, 9)
+shader_parameter/GradualRange = 1.0
+shader_parameter/Anchor = Vector2(0.5, 0.5)
+shader_parameter/OverColor = Color(0, 0, 0, 1)

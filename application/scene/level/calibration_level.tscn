@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgy1qw1bx8sxi"]
+
+[ext_resource type="PackedScene" uid="uid://cf68q7igfosjj" path="res://scene/gui/level/calibration_canvas.tscn" id="1_h375v"]
+
+[sub_resource type="Environment" id="Environment_h375v"]
+ambient_light_source = 1
+reflected_light_source = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_vxjsh"]
+size = Vector3(0.3, 0.3, 0.3)
+
+[node name="CalibrationLevel" type="CalibrationLevel"]
+
+[node name="CalibrationCanvas" parent="." instance=ExtResource("1_h375v")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_h375v")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+current = true
+fov = 45.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.869046, 0.330185, 0.368424, 0, 0.744696, -0.667404, -0.494731, 0.580005, 0.647175, 0, 0, -1)
+mesh = SubResource("BoxMesh_vxjsh")

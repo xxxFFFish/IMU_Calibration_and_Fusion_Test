@@ -32,6 +32,7 @@ public:
 private:
     // Properties
     Ref<PackedScene> m_main_level_packed_scene;
+    Ref<PackedScene> m_calibration_level_packed_scene;
 
 public:
     void init();

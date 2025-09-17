@@ -16,6 +16,8 @@
 #include "manager/level_manager.hpp"
 #include "manager/gui_manager.hpp"
 
+#include "gui/effect/transition_curtain_canvas.hpp"
+
 using namespace godot;
 
 #define TAG "[Main]"
@@ -43,6 +45,8 @@ void Main::_ready() {
     // Connect framework signal
     CONNECT_FRAMEWORK_SIGNAL(PROCESS_QUIT, Main::on_process_quit)
     CONNECT_FRAMEWORK_SIGNAL(PROCESS_SWITCH_LEVEL, Main::on_process_switch_level)
+    CONNECT_FRAMEWORK_SIGNAL(CURTAIN_CLOSE_FINISHED, Main::on_curtain_close_finished)
+    CONNECT_FRAMEWORK_SIGNAL(CURTAIN_OPEN_FINISHED, Main::on_curtain_open_finished)
 
     // Start application
     parse_cmds();
@@ -134,10 +138,66 @@ void Main::start_level() {
     mp_current_level_node = start_level_node;
 }
 
+void Main::switch_level() {
+    mp_transition_curtain_canvas = cast_to<TransitionCurtainCanvas>(
+        framework::GuiManager::get_instance()->instantiate_gui(
+            framework::EGuiCanvas::TRANSITION_CURTAIN
+        )
+    );
+
+    if (likely(mp_transition_curtain_canvas)) {
+        this->add_child(mp_transition_curtain_canvas);
+        mp_transition_curtain_canvas->close_curtain(this->get_viewport()->get_mouse_position());
+    } else {
+        print_error(TAG"Instantiate transition curtain canvas failed!");
+
+        if (mp_current_level_node) {
+            mp_current_level_node->queue_free();
+        }
+    
+        this->add_child(mp_next_level_node);
+        mp_current_level_node = mp_next_level_node;
+
+        mp_process_data->current_level = mp_process_data->next_level;
+    }
+}
+
 void Main::on_process_quit() {
     print_verbose(TAG"On signal process quit.");
 }
 
 void Main::on_process_switch_level() {
     print_verbose(TAG"On signal switch level.");
+
+    if (mp_process_data->current_level != mp_process_data->next_level) {
+        mp_next_level_node = framework::LevelManager::get_instance()->instantiate_level(mp_process_data->next_level);
+        if (likely(mp_next_level_node)) {
+            switch_level();
+        } else {
+            print_error(vformat(TAG"Instantiate level %d failed!", static_cast<int>(mp_process_data->next_level)));
+        }
+    }
+}
+
+void Main::on_curtain_close_finished() {
+    print_verbose(TAG"On signal curtain close finished.");
+
+    if (mp_current_level_node) {
+        mp_current_level_node->queue_free();
+    }
+
+    this->add_child(mp_next_level_node);
+    mp_current_level_node = mp_next_level_node;
+    mp_next_level_node = nullptr;
+
+    mp_process_data->current_level = mp_process_data->next_level;
+
+    mp_transition_curtain_canvas->open_curtain(this->get_viewport()->get_mouse_position());
+}
+
+void Main::on_curtain_open_finished() {
+    print_verbose(TAG"On signal curtain open finished.");
+
+    mp_transition_curtain_canvas->queue_free();
+    mp_transition_curtain_canvas = nullptr;
 }
