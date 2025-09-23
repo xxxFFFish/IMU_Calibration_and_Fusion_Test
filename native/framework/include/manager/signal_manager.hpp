@@ -35,11 +35,11 @@ public:
     void init();
     void deinit();
 
-    Error signal_connect(enum ESignal signal, const Callable &p_callable);
-    void signal_disconnect(enum ESignal signal, const Callable &p_callable);
+    Error signal_connect(ESignal signal, const Callable &p_callable);
+    void signal_disconnect(ESignal signal, const Callable &p_callable);
 
-    Error signal_emit(enum ESignal signal);
-    void signal_emit_deferred(enum ESignal signal);
+    Error signal_emit(ESignal signal);
+    void signal_emit_deferred(ESignal signal);
 };
 
 } // namespace framework

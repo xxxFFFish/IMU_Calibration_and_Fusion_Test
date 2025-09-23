@@ -17,7 +17,6 @@ class Main : public Node {
 protected:
     static void _bind_methods();
 
-// Class Constructor and Engine Virtual Methods
 public:
     Main();
     ~Main();

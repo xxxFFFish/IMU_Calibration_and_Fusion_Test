@@ -87,26 +87,26 @@ void Main::parse_cmds() {
             print_verbose(vformat(TAG"Cmd %d type: %s", i, cmd_buffer[0]));
 
             if (cmd_buffer[0] == "MODE") {
-                print_verbose(vformat(TAG"Set mode to %s", cmd_buffer[1]));
+                print_verbose(vformat(TAG"Set mode to %s.", cmd_buffer[1]));
 
                 if (cmd_buffer[1] == "CALIBRATION") {
                     mp_process_data->start_mode = framework::EStartMode::CALIBRATION;
                 } else if (cmd_buffer[1] == "FUSION") {
                     mp_process_data->start_mode = framework::EStartMode::FUSION;
                 } else {
-                    print_error(vformat(TAG"%s is not a valid mode setting", cmd_buffer[1]));
+                    print_error(vformat(TAG"%s is not a valid mode setting!", cmd_buffer[1]));
                 }
             }
 
             if (cmd_buffer[0] == "LANGUAGE") {
-                print_verbose(vformat(TAG"Set language to %s", cmd_buffer[1]));
+                print_verbose(vformat(TAG"Set language to %s.", cmd_buffer[1]));
 
                 if (cmd_buffer[1] == "EN" || cmd_buffer[1] == "ENGLISH" ) {
                     TranslationServer::get_singleton()->set_locale("en_US");
                 } else if (cmd_buffer[1] == "ZH" || cmd_buffer[1] == "ZH_CN" || cmd_buffer[1] == "CHINESE") {
                     TranslationServer::get_singleton()->set_locale("zh_CN");
                 } else {
-                    print_error(vformat(TAG"%s is not a valid language setting", cmd_buffer[1]));
+                    print_error(vformat(TAG"%s is not a valid language setting!", cmd_buffer[1]));
                 }
             }
         }

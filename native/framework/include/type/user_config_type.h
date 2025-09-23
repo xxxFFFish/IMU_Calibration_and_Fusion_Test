@@ -1,5 +1,5 @@
-#ifndef __CONFIG_TYPES_H
-#define __CONFIG_TYPES_H
+#ifndef __USER_CONFIG_TYPE_H
+#define __USER_CONFIG_TYPE_H
 
 #include <stdint.h>
 
@@ -17,4 +17,4 @@ enum class EWindowMode : int8_t {
 
 } // namespace godot
 
-#endif // __CONFIG_TYPES_H
+#endif // __USER_CONFIG_TYPE_H

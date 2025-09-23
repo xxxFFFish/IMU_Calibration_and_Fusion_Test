@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmnt77sch56n2"]
+
+[ext_resource type="Script" uid="uid://bvd5ybp1crc2j" path="res://script/autoload/middleware_manager.gd" id="1_iyy6p"]
+
+[node name="MiddlewareManager" type="MiddlewareManager"]
+script = ExtResource("1_iyy6p")
+calibration_path = "middleware/calibration.exe"
+fusion_path = "middleware/fusion.exe"

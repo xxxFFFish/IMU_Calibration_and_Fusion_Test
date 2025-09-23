@@ -1,6 +1,5 @@
 #include "manager/level_manager.hpp"
 
-#include <godot_cpp/variant/typed_array.hpp>
 #include <godot_cpp/classes/scene_state.hpp>
 
 #include "macro_utility.h"

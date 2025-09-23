@@ -12,12 +12,7 @@ class TextManager;
 class SignalManager;
 class LevelManager;
 class GuiManager;
-
-class ViewServer;
-
-class OkraImuReceiver;
-
-struct ProcessData;
+class MiddlewareManager;
 
 class ChiefManager : public Node {
     GDCLASS(ChiefManager, Node)
@@ -44,6 +39,7 @@ private:
     SignalManager *mp_signal_manager = nullptr;
     LevelManager *mp_level_manager = nullptr;
     GuiManager *mp_gui_manager = nullptr;
+    MiddlewareManager *mp_middleware_manager = nullptr;
 
 public:
     void init();

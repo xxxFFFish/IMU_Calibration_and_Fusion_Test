@@ -20,7 +20,10 @@ env.Append(
     CPPPATH=[
         "native/base/include",
         "native/framework/include",
-        "native/node/include"
+        "native/node/include",
+        "middleware/include",
+        "middleware/calibration/include",
+        "middleware/fusion/include"
     ]
 )
 sources = \

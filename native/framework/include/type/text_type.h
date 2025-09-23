@@ -1,5 +1,5 @@
-#ifndef __TEXT_TYPES_H
-#define __TEXT_TYPES_H
+#ifndef __TEXT_TYPE_H
+#define __TEXT_TYPE_H
 
 #include <stdint.h>
 
@@ -40,4 +40,4 @@ enum class EGuiText : int32_t { GUI_TEXT_ENUM(_ENUM_BUILD) };
 
 } // namespace godot
 
-#endif // __TEXT_TYPES_H
+#endif // __TEXT_TYPE_H

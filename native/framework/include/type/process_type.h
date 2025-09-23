@@ -1,5 +1,5 @@
-#ifndef __PROCESS_TYPES_H
-#define __PROCESS_TYPES_H
+#ifndef __PROCESS_TYPE_H
+#define __PROCESS_TYPE_H
 
 #include <stdint.h>
 
@@ -17,4 +17,4 @@ enum class EStartMode : int32_t {
 
 } // namespace godot
 
-#endif // __PROCESS_TYPES_H
+#endif // __PROCESS_TYPE_H

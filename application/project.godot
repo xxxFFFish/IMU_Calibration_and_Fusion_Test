@@ -23,6 +23,7 @@ GlobalTextManager="*res://scene/autoload/text_manager.tscn"
 GlobalLevelManager="*res://scene/autoload/level_manager.tscn"
 GlobalSignalManager="*res://scene/autoload/signal_manager.tscn"
 GlobalGuiManager="*res://scene/autoload/gui_manager.tscn"
+GlobalMiddlewareManager="*res://scene/autoload/middleware_manager.tscn"
 
 [debug]
 

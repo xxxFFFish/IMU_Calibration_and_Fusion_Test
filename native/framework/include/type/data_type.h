@@ -1,5 +1,5 @@
-#ifndef __DATA_TYPES_H
-#define __DATA_TYPES_H
+#ifndef __DATA_TYPE_H
+#define __DATA_TYPE_H
 
 #include "type/process_type.h"
 #include "type/user_config_type.h"
@@ -27,4 +27,4 @@ struct UserConfigData {
 
 } // namespace godot
 
-#endif // __DATA_TYPES_H
+#endif // __DATA_TYPE_H

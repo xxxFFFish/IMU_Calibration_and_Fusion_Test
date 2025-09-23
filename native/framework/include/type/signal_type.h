@@ -1,5 +1,5 @@
-#ifndef __SIGNAL_TYPES_H
-#define __SIGNAL_TYPES_H
+#ifndef __SIGNAL_TYPE_H
+#define __SIGNAL_TYPE_H
 
 namespace godot {
 
@@ -22,4 +22,4 @@ enum class ESignal : int64_t {
 
 } // namespace godot
 
-#endif // __SIGNAL_TYPES_H
+#endif // __SIGNAL_TYPE_H

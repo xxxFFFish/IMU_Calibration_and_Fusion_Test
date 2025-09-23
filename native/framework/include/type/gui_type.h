@@ -1,5 +1,5 @@
-#ifndef __GUI_TYPES_H
-#define __GUI_TYPES_H
+#ifndef __GUI_TYPE_H
+#define __GUI_TYPE_H
 
 #include <stdint.h>
 
@@ -17,4 +17,4 @@ enum class EGuiCanvas : int32_t {
 
 } // namespace godot
 
-#endif // __GUI_TYPES_H
+#endif // __GUI_TYPE_H

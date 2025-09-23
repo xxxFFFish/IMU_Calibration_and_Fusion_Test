@@ -7,6 +7,7 @@
 #include "manager/signal_manager.hpp"
 #include "manager/level_manager.hpp"
 #include "manager/gui_manager.hpp"
+#include "manager/middleware_manager.hpp"
 
 using namespace godot;
 using namespace framework;
@@ -36,6 +37,7 @@ void ChiefManager::_ready() {
     mp_signal_manager = SignalManager::get_instance();
     mp_level_manager = LevelManager::get_instance();
     mp_gui_manager = GuiManager::get_instance();
+    mp_middleware_manager = MiddlewareManager::get_instance();
 
     print_verbose(TAG"Ready.");
 }
@@ -50,11 +52,13 @@ void ChiefManager::init() {
     INIT_MANAGER(signal, SignalManager)
     INIT_MANAGER(level, LevelManager)
     INIT_MANAGER(gui, GuiManager)
+    INIT_MANAGER(middleware, MiddlewareManager)
 
     print_verbose(TAG"Init.");
 }
 
 void ChiefManager::deinit() {
+    DEINIT_MANAGER(middleware)
     DEINIT_MANAGER(gui)
     DEINIT_MANAGER(level)
     DEINIT_MANAGER(signal)

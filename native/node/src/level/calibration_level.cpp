@@ -5,6 +5,7 @@
 
 #include "manager/data_manager.hpp"
 #include "manager/signal_manager.hpp"
+#include "manager/middleware_manager.hpp"
 
 using namespace godot;
 
@@ -24,10 +25,20 @@ void CalibrationLevel::_ready() {
 
     // Connect framework signal
 
+    // Start middleware process
+    if (framework::MiddlewareManager::get_instance()->run(framework::EMiddleware::CALIBRATION) != Error::OK) {
+        print_error(TAG"Run middleware process failed!");
+    }
+
     print_verbose(TAG"Ready.");
 }
 
 void CalibrationLevel::_exit_tree() {
+    // Stop middleware process
+    if (framework::MiddlewareManager::get_instance()->is_running(framework::EMiddleware::CALIBRATION)) {
+        framework::MiddlewareManager::get_instance()->stop(framework::EMiddleware::CALIBRATION);
+    }
+
     // Disconnect framework signal
 
     print_verbose(TAG"Exit tree.");

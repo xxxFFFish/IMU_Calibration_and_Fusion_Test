@@ -10,6 +10,7 @@
 #include "manager/signal_manager.hpp"
 #include "manager/level_manager.hpp"
 #include "manager/gui_manager.hpp"
+#include "manager/middleware_manager.hpp"
 
 #include "main/main.hpp"
 
@@ -36,6 +37,7 @@ void initialize_module(ModuleInitializationLevel p_level) {
 	GDREGISTER_RUNTIME_CLASS(framework::SignalManager);
 	GDREGISTER_RUNTIME_CLASS(framework::LevelManager);
 	GDREGISTER_RUNTIME_CLASS(framework::GuiManager);
+	GDREGISTER_RUNTIME_CLASS(framework::MiddlewareManager);
 
 // Scene node
 	// Main node

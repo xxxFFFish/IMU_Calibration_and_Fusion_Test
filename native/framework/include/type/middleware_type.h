@@ -1,5 +1,5 @@
-#ifndef __LEVEL_TYPE_H
-#define __LEVEL_TYPE_H
+#ifndef __MIDDLEWARE_TYPE_H
+#define __MIDDLEWARE_TYPE_H
 
 #include <stdint.h>
 
@@ -7,8 +7,7 @@ namespace godot {
 
 namespace framework {
 
-enum class ELevel : int32_t {
-    MAIN,
+enum class EMiddleware : int32_t {
     CALIBRATION,
     FUSION,
 };
@@ -17,4 +16,4 @@ enum class ELevel : int32_t {
 
 } // namespace godot
 
-#endif // __LEVEL_TYPE_H
+#endif // __MIDDLEWARE_TYPE_H

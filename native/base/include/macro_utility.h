@@ -42,6 +42,16 @@ namespace godot {
     } \
     m_enabled = false;
 
+#define GET_VARIANT_PROPERTY(name, var_name, var_type) \
+    Variant var_##name = this->get(#name); \
+    if (var_##name.get_type() == Variant::NIL) { \
+        print_error(TAG#name" was not found!"); \
+    } else if (var_##name.get_type() != Variant::var_type) { \
+        print_error(TAG#name" type error!"); \
+    } else { \
+        var_name = var_##name; \
+    }
+
 #define GET_RESOURCE_PROPERTY(name, var_name) \
     Variant var_##name = this->get(#name); \
     if (var_##name.get_type() != Variant::OBJECT) { \

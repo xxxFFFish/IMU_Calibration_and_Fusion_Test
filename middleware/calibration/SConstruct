@@ -1,0 +1,50 @@
+#!/usr/bin/env python
+import shutil
+from SCons.Script import *
+
+eigen_path = "E:/OpenLib_Projects/eigen-3.4.0"
+lz4_path = "C:/msys64/mingw64/include"
+flann_path = "C:/flann/include"
+
+env = Environment(
+    CC="gcc",
+    CXX="g++",
+    LINK="g++",
+    AR="ar",
+    tools=["mingw"],
+
+    # CXXFLAGS=['/EHsc'] # if use MSVC
+
+    CPPDEFINES=["hidapi_winapi_EXPORTS"],
+
+    CPPPATH=[
+        "../include",
+        "include",
+        "../hardware/include",
+        eigen_path,
+        lz4_path,
+        flann_path
+    ],
+
+    LIBPATH=[
+        "C:/msys64/mingw64/lib",
+        "C:/flann/lib"
+    ],
+
+    LIBS=[
+        "lz4",
+        "flann_cpp"
+    ]
+)
+
+sources = \
+    Glob("hardware/src/hid_api/*.c") + \
+    Glob("src/*.cpp") + \
+    Glob("src/**/*.cpp")
+
+program = env.Program(target="export/calibration", source=sources)
+
+def copy_after_build(target, source, env):
+    shutil.copy("export/calibration.exe", "../../export/middleware/calibration.exe")
+
+env.AddPostAction(program, Action(copy_after_build))

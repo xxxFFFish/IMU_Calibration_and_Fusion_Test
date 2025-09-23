@@ -51,19 +51,19 @@ void SignalManager::deinit() {
     print_verbose(TAG"Deinit.");
 }
 
-Error SignalManager::signal_connect(enum ESignal signal, const Callable &p_callable) {
+Error SignalManager::signal_connect(ESignal signal, const Callable &p_callable) {
     return this->connect(CAST_TO_SIGNAL_NAME(signal), p_callable);
 }
 
-void SignalManager::signal_disconnect(enum ESignal signal, const Callable &p_callable) {
+void SignalManager::signal_disconnect(ESignal signal, const Callable &p_callable) {
     this->disconnect(CAST_TO_SIGNAL_NAME(signal), p_callable);
 }
 
-Error SignalManager::signal_emit(enum ESignal signal) {
+Error SignalManager::signal_emit(ESignal signal) {
     return this->emit_signal(CAST_TO_SIGNAL_NAME(signal));
 }
 
-void SignalManager::signal_emit_deferred(enum ESignal signal) {
+void SignalManager::signal_emit_deferred(ESignal signal) {
     if (!m_enabled) {
         return;
     }
