@@ -4,6 +4,9 @@
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
 
+#include "fsm_program.hpp"
+#include "context/calibration_fsm_context.hpp"
+
 #include "manager/chief_manager.hpp"
 #include "manager/data_manager.hpp"
 #include "manager/text_manager.hpp"
@@ -28,6 +31,16 @@ void initialize_module(ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
 		return;
 	}
+
+// RefCounted object
+	// Base
+	GDREGISTER_RUNTIME_CLASS(FsmContext);
+	GDREGISTER_RUNTIME_CLASS(FsmStatus);
+	GDREGISTER_RUNTIME_CLASS(FsmProgram);
+	
+	// Context
+	GDREGISTER_RUNTIME_CLASS(framework::CalibrationFsmContext);
+	
 
 // Autoload node
 	// Manager node

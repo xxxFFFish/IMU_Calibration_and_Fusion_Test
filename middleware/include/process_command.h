@@ -15,6 +15,7 @@ struct ProcessCommand {
 
 enum class EProcessCommandType : uint8_t {
     EXIT = 0,
+    RESPONSE,
 };
 
 } //namespace middleware

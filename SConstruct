@@ -28,6 +28,7 @@ env.Append(
 )
 sources = \
     Glob("native/*.cpp") + \
+    Glob("native/base/src/*.cpp") + \
     Glob("native/framework/src/*.cpp") + \
     Glob("native/framework/src/**/*.cpp") + \
     Glob("native/node/src/*.cpp") + \

@@ -9,6 +9,8 @@ namespace godot {
 class Node3D;
 class StandardMaterial3D;
 
+class FsmProgram;
+
 namespace framework {
 class DataManager;
 class SignalManager;
@@ -32,6 +34,10 @@ public:
 
 private:
     framework::ProcessData *mp_process_data = nullptr;
+
+    Ref<FsmProgram> m_fsm_program;
+
+    void register_fsm_status();
 };
 
 } // namespace godot

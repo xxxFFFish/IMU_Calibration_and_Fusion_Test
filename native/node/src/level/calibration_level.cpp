@@ -7,6 +7,9 @@
 #include "manager/signal_manager.hpp"
 #include "manager/middleware_manager.hpp"
 
+#include "fsm_program.hpp"
+#include "context/calibration_fsm_context.hpp"
+
 using namespace godot;
 
 #define TAG "[CalibrationLevel]"
@@ -30,6 +33,17 @@ void CalibrationLevel::_ready() {
         print_error(TAG"Run middleware process failed!");
     }
 
+    // Init and start fsm program
+    m_fsm_program.instantiate();
+    Ref<framework::CalibrationFsmContext> calibration_fsm_context;
+    calibration_fsm_context.instantiate();
+    Ref<FsmContext> cast_fsm_context = calibration_fsm_context;
+    m_fsm_program->set_context(cast_fsm_context);
+
+    register_fsm_status();
+
+    m_fsm_program->start((int)framework::CalibrationFsmContext::ECalibrationFsmStatus::IDLE);
+
     print_verbose(TAG"Ready.");
 }
 
@@ -44,4 +58,56 @@ void CalibrationLevel::_exit_tree() {
     print_verbose(TAG"Exit tree.");
 }
 
-void CalibrationLevel::_process(double delta) {}
+void CalibrationLevel::_process(double delta) {
+    m_fsm_program->process();
+}
+
+void CalibrationLevel::register_fsm_status() {
+    m_fsm_program->register_status(
+        (int)framework::CalibrationFsmContext::ECalibrationFsmStatus::IDLE,
+        [](Ref<FsmContext> &context) { // Enter action
+            print_verbose(TAG"Enter IDLE");
+        },
+        [](Ref<FsmContext> &context) { // Process action
+            print_verbose(TAG"Process IDLE");
+        },
+        [](Ref<FsmContext> &context) { // Exit action
+            print_verbose(TAG"Exit IDLE");
+        },
+        [](Ref<FsmContext> &context) { // Next status
+            return (int)framework::CalibrationFsmContext::ECalibrationFsmStatus::IDLE;
+        }
+    );
+
+    m_fsm_program->register_status(
+        (int)framework::CalibrationFsmContext::ECalibrationFsmStatus::PRE_SAMPLING,
+        [](Ref<FsmContext> &context) { // Enter action
+            print_verbose(TAG"Enter PRE_SAMPLING");
+        },
+        [](Ref<FsmContext> &context) { // Process action
+            print_verbose(TAG"Process PRE_SAMPLING");
+        },
+        [](Ref<FsmContext> &context) { // Exit action
+            print_verbose(TAG"Exit PRE_SAMPLING");
+        },
+        [](Ref<FsmContext> &context) { // Next status
+            return (int)framework::CalibrationFsmContext::ECalibrationFsmStatus::PRE_SAMPLING;
+        }
+    );
+
+    m_fsm_program->register_status(
+        (int)framework::CalibrationFsmContext::ECalibrationFsmStatus::PRE_SAMPLING_END,
+        [](Ref<FsmContext> &context) { // Enter action
+            print_verbose(TAG"Enter PRE_SAMPLING_END");
+        },
+        [](Ref<FsmContext> &context) { // Process action
+            print_verbose(TAG"Process PRE_SAMPLING_END");
+        },
+        [](Ref<FsmContext> &context) { // Exit action
+            print_verbose(TAG"Exit PRE_SAMPLING_END");
+        },
+        [](Ref<FsmContext> &context) { // Next status
+            return (int)framework::CalibrationFsmContext::ECalibrationFsmStatus::PRE_SAMPLING_END;
+        }
+    );
+}
