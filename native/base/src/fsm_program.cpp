@@ -24,24 +24,15 @@ void FsmProgram::transfer_status(int next_status) {
     Ref<FsmStatus> next_status_entity = m_status_map[next_status];
 
     if (m_current_status_entity->on_exit_action != nullptr) {
-        m_current_status_entity->on_exit_action(m_context);
+        m_current_status_entity->on_exit_action();
     }
 
     if (next_status_entity->on_enter_action != nullptr) {
-        next_status_entity->on_enter_action(m_context);
+        next_status_entity->on_enter_action();
     }
 
     m_current_status = next_status;
     m_current_status_entity = next_status_entity;
-}
-
-void FsmProgram::set_context(Ref<FsmContext> &context) {
-    if (context.is_null()) {
-        print_error(TAG"Context is null!");
-        return;
-    }
-
-    m_context = context;
 }
 
 void FsmProgram::register_status(
@@ -49,14 +40,14 @@ void FsmProgram::register_status(
         OnEnterAction on_enter_action,
         OnProcessAction on_process_action,
         OnExitAction on_exit_action,
-        OnNextStatus on_next_status
+        GetNextStatus get_next_status
     ) {
     Ref<FsmStatus> status_entity;
     status_entity.instantiate();
     status_entity->on_enter_action = on_enter_action;
     status_entity->on_process_action = on_process_action;
     status_entity->on_exit_action = on_exit_action;
-    status_entity->on_next_status = on_next_status;
+    status_entity->get_next_status = get_next_status;
 
     m_status_map[status] = status_entity;
 }
@@ -74,19 +65,19 @@ void FsmProgram::start(int status) {
     Ref<FsmStatus> status_entity = m_status_map[status];
 
     if (status_entity->on_enter_action != nullptr) {
-        status_entity->on_enter_action(m_context);
+        status_entity->on_enter_action();
     }
 
     m_current_status = status;
     m_current_status_entity = status_entity;
 }
 
-void FsmProgram::process() {
+void FsmProgram::process(double delta) {
     if (m_current_status_entity->on_process_action != nullptr) {
-        m_current_status_entity->on_process_action(m_context);
+        m_current_status_entity->on_process_action(delta);
     }
 
-    if (m_current_status_entity->on_next_status != nullptr) {
-        transfer_status(m_current_status_entity->on_next_status(m_context));
+    if (m_current_status_entity->get_next_status != nullptr) {
+        transfer_status(m_current_status_entity->get_next_status());
     }
 }

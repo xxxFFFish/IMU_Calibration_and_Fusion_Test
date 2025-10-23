@@ -16,6 +16,8 @@ enum class ESignal : int64_t {
 
     CURTAIN_CLOSE_FINISHED,
     CURTAIN_OPEN_FINISHED,
+
+    CALIBRATION_NONE_RESPONSE,
 };
 
 } //namespace framework

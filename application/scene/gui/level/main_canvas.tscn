@@ -3,6 +3,21 @@
 [ext_resource type="Script" uid="uid://b3f11u2saqxg4" path="res://script/gui/level/main_canvas.gd" id="1_u0xvk"]
 [ext_resource type="Theme" uid="uid://j2khpauoooqn" path="res://theme/level/main_canvas_button.tres" id="2_mfywu"]
 
+[sub_resource type="Animation" id="Animation_mfywu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
 [sub_resource type="Animation" id="Animation_u0xvk"]
 resource_name = "show"
 length = 2.0
@@ -32,21 +47,6 @@ tracks/1/keys = {
 "args": [],
 "method": &"queue_free"
 }]
-}
-
-[sub_resource type="Animation" id="Animation_mfywu"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:visible_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hxrk2"]

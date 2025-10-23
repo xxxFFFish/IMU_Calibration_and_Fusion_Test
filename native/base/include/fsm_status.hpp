@@ -1,16 +1,18 @@
 #ifndef __FSM_STATUS_HPP
 #define __FSM_STATUS_HPP
 
-#include "fsm_context.hpp"
+#include <functional>
+
+#include <godot_cpp/classes/ref_counted.hpp>
 
 namespace godot {
 
-using OnEnterAction = void(*)(Ref<FsmContext> &context);
-using OnProcessAction = void(*)(Ref<FsmContext> &context);
-using OnExitAction = void(*)(Ref<FsmContext> &context);
-using OnNextStatus = int(*)(Ref<FsmContext> &context);
+using OnEnterAction = std::function<void()>;
+using OnProcessAction = std::function<void(double)>;
+using OnExitAction = std::function<void()>;
+using GetNextStatus = std::function<int()>;
 
-class FsmStatus : public RefCounted {
+class FsmStatus final : public RefCounted {
     GDCLASS(FsmStatus, RefCounted)
 
 protected:
@@ -23,7 +25,7 @@ public:
     OnEnterAction on_enter_action;
     OnProcessAction on_process_action;
     OnExitAction on_exit_action;
-    OnNextStatus on_next_status;
+    GetNextStatus get_next_status;
 };
 
 } // namespace godot

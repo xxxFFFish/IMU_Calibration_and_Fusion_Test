@@ -6,6 +6,8 @@
 #include <godot_cpp/classes/file_access.hpp>
 #include <godot_cpp/classes/thread.hpp>
 
+#include "manager/signal_manager.hpp"
+
 #include "macro_utility.h"
 
 #include "calibration_shared_data.h"
@@ -146,6 +148,8 @@ void MiddlewareManager::init_shared_data_process_command(ProcessHandle *p_proces
     p_process_command[1].command = 0;
 
     p_process_handle->last_sub_process_command_id = 0;
+    p_process_handle->wait_response_flag = false;
+    p_process_handle->wait_response_counter = 0;
 }
 
 void MiddlewareManager::send_shared_data_process_command(ProcessHandle *p_process_handle, uint8_t type, uint8_t command) {
@@ -159,11 +163,37 @@ void MiddlewareManager::send_shared_data_process_command(ProcessHandle *p_proces
     p_process_command[0].id++;
     p_process_command[0].type = (uint8_t)type;
     p_process_command[0].command = command;
+
+    p_process_handle->wait_response_flag = true;
+}
+
+void MiddlewareManager::send_response(ProcessHandle *p_process_handle) {
+    if (p_process_handle->p_shared_data_buffer == nullptr) {
+        return;
+    }
+
+    middleware::ProcessCommand *p_process_command =
+            reinterpret_cast<middleware::ProcessCommand *>(p_process_handle->p_shared_data_buffer);
+
+    p_process_command[0].id++;
+    p_process_command[0].type = (uint8_t)middleware::EProcessCommandType::RESPONSE;
+    p_process_command[0].command = 0;
 }
 
 void MiddlewareManager::listen_sub_process_command(ProcessHandle *p_process_handle) {
     if (p_process_handle->p_shared_data_buffer == nullptr) {
         return;
+    }
+
+    if (p_process_handle->wait_response_flag) {
+        if (p_process_handle->wait_response_counter > (500U / 16U)) {
+            SignalManager::get_instance()->signal_emit_deferred(ESignal::CALIBRATION_NONE_RESPONSE);
+            p_process_handle->wait_response_flag = false;
+            p_process_handle->wait_response_counter = 0;
+            return;
+        } else {
+            p_process_handle->wait_response_counter++;
+        }
     }
 
     middleware::ProcessCommand *p_process_command =
@@ -176,6 +206,28 @@ void MiddlewareManager::listen_sub_process_command(ProcessHandle *p_process_hand
     print_verbose(vformat(TAG"Sub process command: %d-%d.", p_process_command[1].type, p_process_command[1].command));
 
     p_process_handle->last_sub_process_command_id = p_process_command[1].id;
+
+    if (p_process_command[1].command == (uint8_t)middleware::EProcessCommandType::RESPONSE) {
+        p_process_handle->wait_response_flag = false;
+        p_process_handle->wait_response_counter = 0;
+        return;
+    }
+
+    switch (p_process_handle->type) {
+        case EMiddleware::CALIBRATION:
+            calibration_sub_process_command_parser();
+            break;
+        
+        case EMiddleware::FUSION:
+            fusion_sub_process_command_parser();
+            break;
+
+        default:;
+    }
+}
+
+void MiddlewareManager::calibration_sub_process_command_parser() {
+
 }
 
 void MiddlewareManager::calibration_monitor_task() {
@@ -224,6 +276,10 @@ task_end:
     print_verbose(TAG"Calibration monitor task end.");
 }
 
+void MiddlewareManager::fusion_sub_process_command_parser() {
+
+}
+
 void MiddlewareManager::fusion_monitor_task() {
     print_verbose(TAG"Fusion monitor task begin.");
 
@@ -231,6 +287,7 @@ void MiddlewareManager::fusion_monitor_task() {
 }
 
 void MiddlewareManager::init() {
+    m_calibration_process_handle.type = EMiddleware::CALIBRATION;
     m_calibration_process_handle.monitor_thread.instantiate();
     m_calibration_process_handle.shared_data_name = CALIBRATION_SHARED_DATA_NAME;
     m_calibration_process_handle.shared_data_size = sizeof(middleware::CalibrationSharedData);
@@ -239,6 +296,7 @@ void MiddlewareManager::init() {
     m_calibration_process_handle.exit_wait_counter = 0;
 
 
+    m_fusion_process_handle.type = EMiddleware::FUSION;
     m_fusion_process_handle.monitor_thread.instantiate();
     // m_fusion_process_handle.shared_data_name = FUSION_SHARED_DATA_NAME;
     // m_fusion_process_handle.shared_data_size = sizeof(middleware::FusionSharedData);
@@ -262,8 +320,6 @@ void MiddlewareManager::deinit() {
         }
     }
 
-    m_calibration_process_handle.monitor_thread.unref();
-
     if (m_fusion_process_handle.is_running) {
         stop(EMiddleware::FUSION);
 
@@ -271,8 +327,6 @@ void MiddlewareManager::deinit() {
             m_fusion_process_handle.monitor_thread->wait_to_finish();
         }
     }
-
-    m_fusion_process_handle.monitor_thread.unref();
 
     print_verbose(TAG"Deinit.");
 }

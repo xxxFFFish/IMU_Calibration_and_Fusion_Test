@@ -22,6 +22,8 @@ void SignalManager::_bind_methods() {
 
     ADD_SIGNAL(MethodInfo(CAST_TO_SIGNAL_NAME(ESignal::CURTAIN_CLOSE_FINISHED)));
     ADD_SIGNAL(MethodInfo(CAST_TO_SIGNAL_NAME(ESignal::CURTAIN_OPEN_FINISHED)));
+
+    ADD_SIGNAL(MethodInfo(CAST_TO_SIGNAL_NAME(ESignal::CALIBRATION_NONE_RESPONSE)));
 }
 
 SignalManager::SignalManager() {

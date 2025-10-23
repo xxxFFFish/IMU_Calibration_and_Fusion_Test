@@ -16,12 +16,16 @@ class MiddlewareManager : public Node {
 
 private:
     struct ProcessHandle {
+        EMiddleware type;
+
         String shared_data_name;
         size_t shared_data_size;
         void *p_map_file_handle{nullptr};
         void *p_shared_data_buffer{nullptr};
 
         uint16_t last_sub_process_command_id;
+        bool wait_response_flag;
+        unsigned int wait_response_counter;
 
         void *p_process_handle{nullptr};
         Ref<Thread> monitor_thread;
@@ -62,10 +66,14 @@ private:
 
     void init_shared_data_process_command(ProcessHandle *p_process_handle);
     void send_shared_data_process_command(ProcessHandle *p_process_handle, uint8_t type, uint8_t command);
+    void send_response(ProcessHandle *p_process_handle);
 
     void listen_sub_process_command(ProcessHandle *p_process_handle);
 
+    void calibration_sub_process_command_parser();
     void calibration_monitor_task();
+
+    void fusion_sub_process_command_parser();
     void fusion_monitor_task();
 
 public:

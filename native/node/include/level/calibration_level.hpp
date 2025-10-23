@@ -12,14 +12,24 @@ class StandardMaterial3D;
 class FsmProgram;
 
 namespace framework {
-class DataManager;
-class SignalManager;
-
 struct ProcessData;
 } // namespace framework
 
 class CalibrationLevel : public Node {
     GDCLASS(CalibrationLevel, Node)
+
+public:
+    enum class ECalibrationFsmStatus : int {
+        ERROR = -1,
+        IDLE,
+        PRE_SAMPLING,
+        PRE_SAMPLING_END,
+        MOTION_SAMPLING,
+        STATIC_SAMPLING,
+        STATIC_SAMPLING_END,
+        AWAIT_RESULT,
+        SAMPLING_END,
+    };
 
 protected:
     static void _bind_methods();

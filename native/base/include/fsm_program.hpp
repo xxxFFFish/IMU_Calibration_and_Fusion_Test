@@ -20,24 +20,22 @@ public:
 
 private:
     TypedDictionary<int, FsmStatus> m_status_map;
-    Ref<FsmContext> m_context;
     int m_current_status;
     Ref<FsmStatus> m_current_status_entity;
 
     void transfer_status(int next_status);
 
 public:
-    void set_context(Ref<FsmContext> &context);
     void register_status(
         int status,
         OnEnterAction on_enter_action,
         OnProcessAction on_process_action,
         OnExitAction on_exit_action,
-        OnNextStatus on_next_status
+        GetNextStatus get_next_status
     );
     void unregister_status(int status);
     void start(int status);
-    void process();
+    void process(double delta);
 };
 
 } // namespace godot
