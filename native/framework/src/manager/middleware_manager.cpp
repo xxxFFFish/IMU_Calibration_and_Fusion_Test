@@ -36,8 +36,8 @@ MiddlewareManager::~MiddlewareManager() {
 
 void MiddlewareManager::_ready() {
     // Check resource
-    GET_VARIANT_PROPERTY(calibration_path, m_calibration_path, STRING)
-    GET_VARIANT_PROPERTY(fusion_path, m_fusion_path, STRING)
+    GET_VARIANT_PROPERTY(calibration_path, STRING)
+    GET_VARIANT_PROPERTY(fusion_path, STRING)
 
     // Get data point
 

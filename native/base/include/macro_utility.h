@@ -42,47 +42,47 @@ namespace godot {
     } \
     m_enabled = false;
 
-#define GET_VARIANT_PROPERTY(name, var_name, var_type) \
+#define GET_VARIANT_PROPERTY(name, var_type) \
     Variant var_##name = this->get(#name); \
     if (var_##name.get_type() == Variant::NIL) { \
         print_error(TAG#name" was not found!"); \
     } else if (var_##name.get_type() != Variant::var_type) { \
         print_error(TAG#name" type error!"); \
     } else { \
-        var_name = var_##name; \
+        m_##name = var_##name; \
     }
 
-#define GET_RESOURCE_PROPERTY(name, var_name) \
+#define GET_RESOURCE_PROPERTY(name) \
     Variant var_##name = this->get(#name); \
     if (var_##name.get_type() != Variant::OBJECT) { \
         print_error(TAG#name" was not found!"); \
     } else { \
-        var_name = var_##name; \
-        if (var_name.is_null()) { \
+        m_##name = var_##name; \
+        if (m_##name.is_null()) { \
             print_error(TAG#name" is null!"); \
         } \
     }
 
-#define GET_PACKED_SCENE_PROPERTY(name, var_name, type_name) \
+#define GET_PACKED_SCENE_PROPERTY(name, type_name) \
     Variant var_##name = this->get(#name); \
     if (var_##name.get_type() != Variant::OBJECT) { \
         print_error(TAG#name" was not found!"); \
     } else { \
-        var_name = var_##name; \
-        if (unlikely(var_name.is_null())) { \
+        m_##name = var_##name; \
+        if (unlikely(m_##name.is_null())) { \
             print_error(TAG#name" is null!"); \
-        } else if (var_name->get_state()->get_node_type(0) != type_name::get_class_static()) { \
+        } else if (m_##name->get_state()->get_node_type(0) != type_name::get_class_static()) { \
             print_error(TAG#name" type error!"); \
         } \
     }
 
-#define GET_NODE_PROPERTY(name, var_name, type_name) \
+#define GET_NODE_PROPERTY(name, type_name) \
     Variant var_##name = this->get(#name); \
     if (var_##name.get_type() != Variant::OBJECT) { \
         print_error(TAG#name" was not found!"); \
     } else { \
-        var_name = Object::cast_to<type_name>(var_##name); \
-        if (var_name == nullptr) { \
+        mp_##name = Object::cast_to<type_name>(var_##name); \
+        if (mp_##name == nullptr) { \
             print_error(TAG#name" is null!"); \
         } \
     }
@@ -138,6 +138,15 @@ namespace godot {
         framework::ESignal::name, \
         callable_mp(this, &handler_name) \
     );
+
+#define CONNECT_NODE_PROPERTY_SIGNAL(name, signal_name, handler_name) \
+    if (mp_##name == nullptr) { \
+        print_error(TAG#name" is null!"); \
+    } else { \
+        if (mp_##name->connect(#signal_name, callable_mp(this, &handler_name)) != Error::OK) { \
+            print_error(TAG"Connect "#name" signal "#signal_name" failed!"); \
+        } \
+    }
 
 } // namespace godot
 

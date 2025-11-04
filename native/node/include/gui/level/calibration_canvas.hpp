@@ -28,10 +28,6 @@ public:
 
 private:
     // Properties
-    Label *mp_gyro_data_label = nullptr;
-    Label *mp_accelerometer_data_label = nullptr;
-    Label *mp_magnetometer_data_label = nullptr;
-    Label *mp_calibration_progress_label = nullptr;
     ProgressBar *mp_calibration_progress_bar = nullptr;
 };
 

@@ -32,8 +32,8 @@ LevelManager::~LevelManager() {
 
 void LevelManager::_ready() {
     // Check resource
-    GET_PACKED_SCENE_PROPERTY(main_level_packed_scene, m_main_level_packed_scene, MainLevel)
-    GET_PACKED_SCENE_PROPERTY(calibration_level_packed_scene, m_calibration_level_packed_scene, CalibrationLevel)
+    GET_PACKED_SCENE_PROPERTY(main_level_packed_scene, MainLevel)
+    GET_PACKED_SCENE_PROPERTY(calibration_level_packed_scene, CalibrationLevel)
 
     print_verbose(TAG"Ready.");
 }

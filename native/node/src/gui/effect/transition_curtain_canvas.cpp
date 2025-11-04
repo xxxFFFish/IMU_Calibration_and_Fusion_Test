@@ -20,8 +20,8 @@ TransitionCurtainCanvas::~TransitionCurtainCanvas() {}
 
 void TransitionCurtainCanvas::_ready() {
     // Check and initilize resource
-    GET_RESOURCE_PROPERTY(curtain_material, m_curtain_material)
-    GET_NODE_PROPERTY(transition_player, mp_transition_player, AnimationPlayer)
+    GET_RESOURCE_PROPERTY(curtain_material)
+    GET_NODE_PROPERTY(transition_player, AnimationPlayer)
 
     if (likely(mp_transition_player)) {
         if (mp_transition_player->connect(

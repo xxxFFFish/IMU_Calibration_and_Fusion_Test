@@ -23,33 +23,15 @@ MainCanvas::~MainCanvas() {}
 
 void MainCanvas::_ready() {
     // Check and initilize resource
-    GET_AND_INIT_BUTTON_PROPERTY(
-        start_calibration_button,
-        mp_start_calibration_button,
-        LEVEL_GUI_MAIN_START_CALIBRATION_BOTTON,
-        MainCanvas::on_start_calibration_button_pressed
-    )
+    GET_NODE_PROPERTY(start_calibration_button, Button)
+    GET_NODE_PROPERTY(start_fusion_button, Button)
+    GET_NODE_PROPERTY(option_button, Button)
+    GET_NODE_PROPERTY(quit_button, Button)
 
-    GET_AND_INIT_BUTTON_PROPERTY(
-        start_fusion_button,
-        mp_start_fusion_button,
-        LEVEL_GUI_MAIN_START_FUSION_BOTTON,
-        MainCanvas::on_start_fusion_button_pressed
-    )
-
-    GET_AND_INIT_BUTTON_PROPERTY(
-        option_button,
-        mp_option_button,
-        LEVEL_GUI_MAIN_OPTION_BOTTON,
-        MainCanvas::on_option_button_pressed
-    )
-
-    GET_AND_INIT_BUTTON_PROPERTY(
-        quit_button,
-        mp_quit_button,
-        LEVEL_GUI_MAIN_QUIT_BOTTON,
-        MainCanvas::on_quit_button_pressed
-    )
+    CONNECT_NODE_PROPERTY_SIGNAL(start_calibration_button, pressed, MainCanvas::on_start_calibration_button_pressed)
+    CONNECT_NODE_PROPERTY_SIGNAL(start_fusion_button, pressed, MainCanvas::on_start_fusion_button_pressed)
+    CONNECT_NODE_PROPERTY_SIGNAL(option_button, pressed, MainCanvas::on_option_button_pressed)
+    CONNECT_NODE_PROPERTY_SIGNAL(quit_button, pressed, MainCanvas::on_quit_button_pressed)
 
     // Get data point
     mp_process_data = framework::DataManager::get_instance()->own_process_data();

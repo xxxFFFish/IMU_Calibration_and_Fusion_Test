@@ -91,9 +91,9 @@ size_flags_vertical = 0
 mouse_filter = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_y = 12
-theme_override_constants/shadow_offset_x = 16
 theme_override_constants/shadow_outline_size = 10
+theme_override_constants/shadow_offset_x = 16
+theme_override_constants/shadow_offset_y = 12
 theme_override_font_sizes/normal_font_size = 160
 theme_override_font_sizes/bold_font_size = 160
 bbcode_enabled = true
@@ -126,7 +126,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("2_mfywu")
-text = "START CALIBRATION"
+text = "UNIVERSAL_CAPITAL_START_CALIBRATION"
 text_overrun_behavior = 3
 
 [node name="StartFusionButton" type="Button" parent="MarginContainer/VBoxContainer"]
@@ -135,7 +135,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("2_mfywu")
-text = "START FUSION"
+text = "UNIVERSAL_CAPITAL_START_FUSION"
 text_overrun_behavior = 3
 
 [node name="OptionButton" type="Button" parent="MarginContainer/VBoxContainer"]
@@ -144,7 +144,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("2_mfywu")
-text = "OPTION"
+text = "UNIVERSAL_CAPITAL_OPTION"
 text_overrun_behavior = 3
 
 [node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer"]
@@ -153,5 +153,5 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("2_mfywu")
-text = "QUIT"
+text = "UNIVERSAL_CAPITAL_QUIT"
 text_overrun_behavior = 3

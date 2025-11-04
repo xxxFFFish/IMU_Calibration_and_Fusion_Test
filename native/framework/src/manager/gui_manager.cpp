@@ -33,8 +33,8 @@ GuiManager::~GuiManager() {
 
 void GuiManager::_ready() {
     // Check resource
-    // GET_PACKED_SCENE_PROPERTY(option_canvas_packed_scene, m_option_canvas_packed_scene, OptionCanvas)
-    GET_PACKED_SCENE_PROPERTY(transition_curtain_canvas_packed_scene, m_transition_curtain_canvas_packed_scene, TransitionCurtainCanvas)
+    // GET_PACKED_SCENE_PROPERTY(option_canvas_packed_scene, OptionCanvas)
+    GET_PACKED_SCENE_PROPERTY(transition_curtain_canvas_packed_scene, TransitionCurtainCanvas)
 
     print_verbose(TAG"Ready.");
 }
