@@ -442,8 +442,6 @@ bool MiddlewareManager::is_running(EMiddleware object) {
         return false;
     }
 
-    ProcessHandle *p_process_handle = nullptr;
-
     switch (object) {
         case EMiddleware::CALIBRATION:
             return m_calibration_process_handle.is_running;
