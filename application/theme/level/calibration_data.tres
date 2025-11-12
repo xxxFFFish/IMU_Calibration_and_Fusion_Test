@@ -1,0 +1,72 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://dj2dx8aj6avjf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u4fac"]
+bg_color = Color(1, 0, 0, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qmdsy"]
+bg_color = Color(1, 0, 0, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0wt6m"]
+bg_color = Color(0, 0, 0, 0.24705882)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_latl3"]
+bg_color = Color(0, 0.101960786, 0.2, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x1p51"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_elsbs"]
+bg_color = Color(0, 1, 0.66666675, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[resource]
+Button/font_sizes/font_size = 32
+Button/styles/focus = SubResource("StyleBoxFlat_u4fac")
+Button/styles/hover = SubResource("StyleBoxFlat_u4fac")
+Button/styles/normal = SubResource("StyleBoxFlat_qmdsy")
+Button/styles/pressed = SubResource("StyleBoxFlat_0wt6m")
+MarginContainer/constants/margin_bottom = 4
+MarginContainer/constants/margin_left = 4
+MarginContainer/constants/margin_right = 4
+MarginContainer/constants/margin_top = 4
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_latl3")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_x1p51")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_elsbs")

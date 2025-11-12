@@ -36,7 +36,7 @@ window/size/viewport_height=720
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://asset/text/gui_text.en_US.translation", "res://asset/text/gui_text.zh_CN.translation")
+locale/translations=PackedStringArray("res://asset/text/gui_text.en_US.translation", "res://asset/text/gui_text.zh_CN.translation", "res://asset/text/hint_text.en_US.translation", "res://asset/text/hint_text.zh_CN.translation")
 
 [rendering]
 

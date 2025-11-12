@@ -1,3 +1,1286 @@
-[gd_scene format=3 uid="uid://cf68q7igfosjj"]
+[gd_scene load_steps=5 format=3 uid="uid://cf68q7igfosjj"]
 
-[node name="CalibrationCanvas" type="CalibrationCanvas"]
+[ext_resource type="Theme" uid="uid://u8m7wftci7fl" path="res://theme/level/screen_margin.tres" id="1_ah4gq"]
+[ext_resource type="Script" uid="uid://2at4ag24xpsm" path="res://script/gui/level/calibration_canvas.gd" id="1_yphkg"]
+[ext_resource type="Theme" uid="uid://dj2dx8aj6avjf" path="res://theme/level/calibration_data.tres" id="2_ny10e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ny10e"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="CalibrationCanvas" type="CalibrationCanvas" node_paths=PackedStringArray("status_label", "status_color_rect", "gyro_x_data_label", "gyro_y_data_label", "gyro_z_data_label", "gyro_count_label", "acce_x_data_label", "acce_y_data_label", "acce_z_data_label", "acce_count_label", "mag_x_data_label", "mag_y_data_label", "mag_z_data_label", "mag_static_count_label", "mag_motion_count_label", "gyro_motion_flag_color_rect", "gyro_x_square_error", "gyro_y_square_error", "gyro_z_square_error", "gyro_sum_square_error", "gyro_x_static_square_error", "gyro_y_static_square_error", "gyro_z_static_square_error", "gyro_sum_static_square_error", "acce_motion_flag_color_rect", "acce_x_square_error", "acce_y_square_error", "acce_z_square_error", "acce_sum_square_error", "acce_x_static_square_error", "acce_y_static_square_error", "acce_z_static_square_error", "acce_sum_static_square_error", "mag_motion_flag_color_rect", "mag_x_square_error", "mag_y_square_error", "mag_z_square_error", "mag_sum_square_error", "mag_x_static_square_error", "mag_y_static_square_error", "mag_z_static_square_error", "mag_sum_static_square_error", "calibration_progress_bar", "hint_panel_container", "hint_label", "enter_button")]
+layer = 10
+script = ExtResource("1_yphkg")
+status_label = NodePath("MarginContainer/StatusContainer/StatusLabel")
+status_color_rect = NodePath("MarginContainer/StatusContainer/BackColorRect")
+gyro_x_data_label = NodePath("MarginContainer/RawDataVBoxContainer/GyroDataContainer/MarginContainer/VBoxContainer/XDataHBoxContainer/XDataContainer/GyroXDataLabel")
+gyro_y_data_label = NodePath("MarginContainer/RawDataVBoxContainer/GyroDataContainer/MarginContainer/VBoxContainer/YDataHBoxContainer/YDataContainer/GyroYDataLabel")
+gyro_z_data_label = NodePath("MarginContainer/RawDataVBoxContainer/GyroDataContainer/MarginContainer/VBoxContainer/ZDataHBoxContainer/ZDataContainer/GyroZDataLabel")
+gyro_count_label = NodePath("MarginContainer/RawDataVBoxContainer/GyroDataContainer/MarginContainer/VBoxContainer/CountHBoxContainer/CountContainer/GyroCountLabel")
+acce_x_data_label = NodePath("MarginContainer/RawDataVBoxContainer/AcceDataContainer/MarginContainer/VBoxContainer/XDataHBoxContainer/XDataContainer/AcceXDataLabel")
+acce_y_data_label = NodePath("MarginContainer/RawDataVBoxContainer/AcceDataContainer/MarginContainer/VBoxContainer/YDataHBoxContainer/YDataContainer/AcceYDataLabel")
+acce_z_data_label = NodePath("MarginContainer/RawDataVBoxContainer/AcceDataContainer/MarginContainer/VBoxContainer/ZDataHBoxContainer/ZDataContainer/AcceZDataLabel")
+acce_count_label = NodePath("MarginContainer/RawDataVBoxContainer/AcceDataContainer/MarginContainer/VBoxContainer/CountHBoxContainer/CountContainer/AcceCountLabel")
+mag_x_data_label = NodePath("MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer/XDataHBoxContainer/XDataContainer/MagXDataLabel")
+mag_y_data_label = NodePath("MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer/YDataHBoxContainer/YDataContainer/MagYDataLabel")
+mag_z_data_label = NodePath("MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer/ZDataHBoxContainer/ZDataContainer/MagZDataLabel")
+mag_static_count_label = NodePath("MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer/StaticCountHBoxContainer/CountContainer/MagStaticCountLabel")
+mag_motion_count_label = NodePath("MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer/MotionCountHBoxContainer/CountContainer/MagMotionCountLabel")
+gyro_motion_flag_color_rect = NodePath("MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/HBoxContainer/GyroMotionFlagColorRect")
+gyro_x_square_error = NodePath("MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/XSquareErrorHBoxContainer/XSquareErrorContainer/GyroXSquareErrorLabel")
+gyro_y_square_error = NodePath("MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/YSquareErrorHBoxContainer/YSquareErrorContainer/GyroYSquareErrorLabel")
+gyro_z_square_error = NodePath("MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/ZSquareErrorHBoxContainer/ZSquareErrorContainer/GyroZSquareErrorLabel")
+gyro_sum_square_error = NodePath("MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/SumSquareErrorHBoxContainer/SumSquareErrorContainer/GyroSumSquareErrorLabel")
+gyro_x_static_square_error = NodePath("MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/XSquareErrorHBoxContainer/XStaticSquareErrorContainer/GyroXStaticSquareErrorLabel")
+gyro_y_static_square_error = NodePath("MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/YSquareErrorHBoxContainer/YStaticSquareErrorContainer/GyroYStaticSquareErrorLabel")
+gyro_z_static_square_error = NodePath("MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/ZSquareErrorHBoxContainer/ZStaticSquareErrorContainer/GyroZStaticSquareErrorLabel")
+gyro_sum_static_square_error = NodePath("MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/SumSquareErrorHBoxContainer/SumStaticSquareErrorContainer/GyroSumStaticSquareErrorLabel")
+acce_motion_flag_color_rect = NodePath("MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/HBoxContainer/AcceMotionFlagColorRect")
+acce_x_square_error = NodePath("MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/XSquareErrorHBoxContainer/XSquareErrorContainer/AcceXSquareErrorLabel")
+acce_y_square_error = NodePath("MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/YSquareErrorHBoxContainer/YSquareErrorContainer/AcceYSquareErrorLabel")
+acce_z_square_error = NodePath("MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/ZSquareErrorHBoxContainer/ZSquareErrorContainer/AcceZSquareErrorLabel")
+acce_sum_square_error = NodePath("MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/SumSquareErrorHBoxContainer/SumSquareErrorContainer/AcceSumSquareErrorLabel")
+acce_x_static_square_error = NodePath("MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/XSquareErrorHBoxContainer/XStaticSquareErrorContainer/AcceXStaticSquareErrorLabel")
+acce_y_static_square_error = NodePath("MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/YSquareErrorHBoxContainer/YStaticSquareErrorContainer/AcceYStaticSquareErrorLabel")
+acce_z_static_square_error = NodePath("MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/ZSquareErrorHBoxContainer/ZStaticSquareErrorContainer/AcceZStaticSquareErrorLabel")
+acce_sum_static_square_error = NodePath("MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/SumSquareErrorHBoxContainer/SumStaticSquareErrorContainer/AcceSumStaticSquareErrorLabel")
+mag_motion_flag_color_rect = NodePath("MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/HBoxContainer/MagMotionFlagColorRect")
+mag_x_square_error = NodePath("MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/XSquareErrorHBoxContainer/XSquareErrorContainer/MagXSquareErrorLabel")
+mag_y_square_error = NodePath("MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/YSquareErrorHBoxContainer/YSquareErrorContainer/MagYSquareErrorLabel")
+mag_z_square_error = NodePath("MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/ZSquareErrorHBoxContainer/ZSquareErrorContainer/MagZSquareErrorLabel")
+mag_sum_square_error = NodePath("MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/SumSquareErrorHBoxContainer/SumSquareErrorContainer/MagSumSquareErrorLabel")
+mag_x_static_square_error = NodePath("MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/XSquareErrorHBoxContainer/XStaticSquareErrorContainer/MagXStaticSquareErrorLabel")
+mag_y_static_square_error = NodePath("MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/YSquareErrorHBoxContainer/YStaticSquareErrorContainer/MagYStaticSquareErrorLabel")
+mag_z_static_square_error = NodePath("MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/ZSquareErrorHBoxContainer/ZStaticSquareErrorContainer/MagZStaticSquareErrorLabel")
+mag_sum_static_square_error = NodePath("MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/SumSquareErrorHBoxContainer/SumStaticSquareErrorContainer/MagSumStaticSquareErrorLabel")
+calibration_progress_bar = NodePath("MarginContainer/ProgressContainer/MarginContainer/VBoxContainer/CalibrationProgressBar")
+sampling_flag_color = Color(0, 1, 0.66666675, 1)
+waiting_flag_color = Color(1, 0, 0, 1)
+motion_flag_color = Color(0, 1, 0.66666675, 1)
+static_flag_color = Color(1, 0, 0, 1)
+hint_panel_container = NodePath("MarginContainer/HintPanelContainer")
+hint_label = NodePath("MarginContainer/HintPanelContainer/MarginContainer/HintLabel")
+enter_button = NodePath("MarginContainer/HintPanelContainer/MarginContainer/EnterButton")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ah4gq")
+
+[node name="StatusContainer" type="PanelContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(400, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="BackColorRect" type="ColorRect" parent="MarginContainer/StatusContainer"]
+layout_mode = 2
+mouse_filter = 2
+color = Color(1, 0, 0, 1)
+
+[node name="StatusLabel" type="Label" parent="MarginContainer/StatusContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 40
+text = "CALIBRATION_CAPITAL_STATUS_IDLE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RawDataVBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 8
+
+[node name="GyroDataContainer" type="PanelContainer" parent="MarginContainer/RawDataVBoxContainer"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme = ExtResource("2_ny10e")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/RawDataVBoxContainer/GyroDataContainer"]
+layout_mode = 2
+theme = ExtResource("2_ny10e")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/RawDataVBoxContainer/GyroDataContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 4
+
+[node name="TypeLabel" type="Label" parent="MarginContainer/RawDataVBoxContainer/GyroDataContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "UNIVERSAL_LABEL_GYRO_RAW_DATA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="XDataHBoxContainer" type="HBoxContainer" parent="MarginContainer/RawDataVBoxContainer/GyroDataContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+
+[node name="XLabel" type="Label" parent="MarginContainer/RawDataVBoxContainer/GyroDataContainer/MarginContainer/VBoxContainer/XDataHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="XDataContainer" type="PanelContainer" parent="MarginContainer/RawDataVBoxContainer/GyroDataContainer/MarginContainer/VBoxContainer/XDataHBoxContainer"]
+custom_minimum_size = Vector2(140, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="GyroXDataLabel" type="Label" parent="MarginContainer/RawDataVBoxContainer/GyroDataContainer/MarginContainer/VBoxContainer/XDataHBoxContainer/XDataContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "12345678"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YDataHBoxContainer" type="HBoxContainer" parent="MarginContainer/RawDataVBoxContainer/GyroDataContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+
+[node name="YLabel" type="Label" parent="MarginContainer/RawDataVBoxContainer/GyroDataContainer/MarginContainer/VBoxContainer/YDataHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Y"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YDataContainer" type="PanelContainer" parent="MarginContainer/RawDataVBoxContainer/GyroDataContainer/MarginContainer/VBoxContainer/YDataHBoxContainer"]
+custom_minimum_size = Vector2(140, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="GyroYDataLabel" type="Label" parent="MarginContainer/RawDataVBoxContainer/GyroDataContainer/MarginContainer/VBoxContainer/YDataHBoxContainer/YDataContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "12345678"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ZDataHBoxContainer" type="HBoxContainer" parent="MarginContainer/RawDataVBoxContainer/GyroDataContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+
+[node name="ZLabel" type="Label" parent="MarginContainer/RawDataVBoxContainer/GyroDataContainer/MarginContainer/VBoxContainer/ZDataHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Z"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ZDataContainer" type="PanelContainer" parent="MarginContainer/RawDataVBoxContainer/GyroDataContainer/MarginContainer/VBoxContainer/ZDataHBoxContainer"]
+custom_minimum_size = Vector2(140, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="GyroZDataLabel" type="Label" parent="MarginContainer/RawDataVBoxContainer/GyroDataContainer/MarginContainer/VBoxContainer/ZDataHBoxContainer/ZDataContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "12345678"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountHBoxContainer" type="HBoxContainer" parent="MarginContainer/RawDataVBoxContainer/GyroDataContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+
+[node name="Label" type="Label" parent="MarginContainer/RawDataVBoxContainer/GyroDataContainer/MarginContainer/VBoxContainer/CountHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "UNIVERSAL_LABEL_SAMPLED_COUNT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountContainer" type="PanelContainer" parent="MarginContainer/RawDataVBoxContainer/GyroDataContainer/MarginContainer/VBoxContainer/CountHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="GyroCountLabel" type="Label" parent="MarginContainer/RawDataVBoxContainer/GyroDataContainer/MarginContainer/VBoxContainer/CountHBoxContainer/CountContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "1/24"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AcceDataContainer" type="PanelContainer" parent="MarginContainer/RawDataVBoxContainer"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme = ExtResource("2_ny10e")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/RawDataVBoxContainer/AcceDataContainer"]
+layout_mode = 2
+theme = ExtResource("2_ny10e")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/RawDataVBoxContainer/AcceDataContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 4
+
+[node name="TypeLabel" type="Label" parent="MarginContainer/RawDataVBoxContainer/AcceDataContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "UNIVERSAL_LABEL_ACCE_RAW_DATA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="XDataHBoxContainer" type="HBoxContainer" parent="MarginContainer/RawDataVBoxContainer/AcceDataContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+
+[node name="XLabel" type="Label" parent="MarginContainer/RawDataVBoxContainer/AcceDataContainer/MarginContainer/VBoxContainer/XDataHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="XDataContainer" type="PanelContainer" parent="MarginContainer/RawDataVBoxContainer/AcceDataContainer/MarginContainer/VBoxContainer/XDataHBoxContainer"]
+custom_minimum_size = Vector2(140, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="AcceXDataLabel" type="Label" parent="MarginContainer/RawDataVBoxContainer/AcceDataContainer/MarginContainer/VBoxContainer/XDataHBoxContainer/XDataContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "12345678"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YDataHBoxContainer" type="HBoxContainer" parent="MarginContainer/RawDataVBoxContainer/AcceDataContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+
+[node name="YLabel" type="Label" parent="MarginContainer/RawDataVBoxContainer/AcceDataContainer/MarginContainer/VBoxContainer/YDataHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Y"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YDataContainer" type="PanelContainer" parent="MarginContainer/RawDataVBoxContainer/AcceDataContainer/MarginContainer/VBoxContainer/YDataHBoxContainer"]
+custom_minimum_size = Vector2(140, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="AcceYDataLabel" type="Label" parent="MarginContainer/RawDataVBoxContainer/AcceDataContainer/MarginContainer/VBoxContainer/YDataHBoxContainer/YDataContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "12345678"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ZDataHBoxContainer" type="HBoxContainer" parent="MarginContainer/RawDataVBoxContainer/AcceDataContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+
+[node name="ZLabel" type="Label" parent="MarginContainer/RawDataVBoxContainer/AcceDataContainer/MarginContainer/VBoxContainer/ZDataHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Z"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ZDataContainer" type="PanelContainer" parent="MarginContainer/RawDataVBoxContainer/AcceDataContainer/MarginContainer/VBoxContainer/ZDataHBoxContainer"]
+custom_minimum_size = Vector2(140, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="AcceZDataLabel" type="Label" parent="MarginContainer/RawDataVBoxContainer/AcceDataContainer/MarginContainer/VBoxContainer/ZDataHBoxContainer/ZDataContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "12345678"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountHBoxContainer" type="HBoxContainer" parent="MarginContainer/RawDataVBoxContainer/AcceDataContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+
+[node name="Label" type="Label" parent="MarginContainer/RawDataVBoxContainer/AcceDataContainer/MarginContainer/VBoxContainer/CountHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "UNIVERSAL_LABEL_SAMPLED_COUNT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountContainer" type="PanelContainer" parent="MarginContainer/RawDataVBoxContainer/AcceDataContainer/MarginContainer/VBoxContainer/CountHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="AcceCountLabel" type="Label" parent="MarginContainer/RawDataVBoxContainer/AcceDataContainer/MarginContainer/VBoxContainer/CountHBoxContainer/CountContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "1/24"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MagDataContainer" type="PanelContainer" parent="MarginContainer/RawDataVBoxContainer"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme = ExtResource("2_ny10e")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/RawDataVBoxContainer/MagDataContainer"]
+layout_mode = 2
+theme = ExtResource("2_ny10e")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 4
+
+[node name="TypeLabel" type="Label" parent="MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "UNIVERSAL_LABEL_MAG_RAW_DATA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="XDataHBoxContainer" type="HBoxContainer" parent="MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+
+[node name="XLabel" type="Label" parent="MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer/XDataHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="XDataContainer" type="PanelContainer" parent="MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer/XDataHBoxContainer"]
+custom_minimum_size = Vector2(140, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="MagXDataLabel" type="Label" parent="MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer/XDataHBoxContainer/XDataContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "12345678"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YDataHBoxContainer" type="HBoxContainer" parent="MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+
+[node name="YLabel" type="Label" parent="MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer/YDataHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Y"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YDataContainer" type="PanelContainer" parent="MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer/YDataHBoxContainer"]
+custom_minimum_size = Vector2(140, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="MagYDataLabel" type="Label" parent="MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer/YDataHBoxContainer/YDataContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "12345678"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ZDataHBoxContainer" type="HBoxContainer" parent="MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+
+[node name="ZLabel" type="Label" parent="MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer/ZDataHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Z"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ZDataContainer" type="PanelContainer" parent="MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer/ZDataHBoxContainer"]
+custom_minimum_size = Vector2(140, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="MagZDataLabel" type="Label" parent="MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer/ZDataHBoxContainer/ZDataContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "12345678"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StaticCountHBoxContainer" type="HBoxContainer" parent="MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+
+[node name="Label" type="Label" parent="MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer/StaticCountHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "UNIVERSAL_LABEL_STATIC_SAMPLED_COUNT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountContainer" type="PanelContainer" parent="MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer/StaticCountHBoxContainer"]
+custom_minimum_size = Vector2(100, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="MagStaticCountLabel" type="Label" parent="MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer/StaticCountHBoxContainer/CountContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "1/24"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MotionCountHBoxContainer" type="HBoxContainer" parent="MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+
+[node name="Label" type="Label" parent="MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer/MotionCountHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "UNIVERSAL_LABEL_MOTION_SAMPLED_COUNT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountContainer" type="PanelContainer" parent="MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer/MotionCountHBoxContainer"]
+custom_minimum_size = Vector2(100, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="MagMotionCountLabel" type="Label" parent="MarginContainer/RawDataVBoxContainer/MagDataContainer/MarginContainer/VBoxContainer/MotionCountHBoxContainer/CountContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "1000/2400"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SquareErrorVBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="GyroSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_ny10e")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_ny10e")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="TypeLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "UNIVERSAL_LABEL_GYRO_SQUARE_ERROR"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GyroMotionFlagColorRect" type="ColorRect" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(26, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+color = Color(0, 1, 0.66666675, 1)
+
+[node name="XSquareErrorHBoxContainer" type="HBoxContainer" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="XLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/XSquareErrorHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="XSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/XSquareErrorHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="GyroXSquareErrorLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/XSquareErrorHBoxContainer/XSquareErrorContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "10.00E-13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="XStaticSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/XSquareErrorHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="GyroXStaticSquareErrorLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/XSquareErrorHBoxContainer/XStaticSquareErrorContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "10.00E-13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YSquareErrorHBoxContainer" type="HBoxContainer" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="YLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/YSquareErrorHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Y"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/YSquareErrorHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="GyroYSquareErrorLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/YSquareErrorHBoxContainer/YSquareErrorContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "10.00E-13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YStaticSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/YSquareErrorHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="GyroYStaticSquareErrorLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/YSquareErrorHBoxContainer/YStaticSquareErrorContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "10.00E-13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ZSquareErrorHBoxContainer" type="HBoxContainer" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="ZLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/ZSquareErrorHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ZSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/ZSquareErrorHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="GyroZSquareErrorLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/ZSquareErrorHBoxContainer/ZSquareErrorContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "10.00E-13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ZStaticSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/ZSquareErrorHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="GyroZStaticSquareErrorLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/ZSquareErrorHBoxContainer/ZStaticSquareErrorContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "10.00E-13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SumSquareErrorHBoxContainer" type="HBoxContainer" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="SumLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/SumSquareErrorHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "UNIVERSAL_LABEL_SUM"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SumSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/SumSquareErrorHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="GyroSumSquareErrorLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/SumSquareErrorHBoxContainer/SumSquareErrorContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "10.00E-13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SumStaticSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/SumSquareErrorHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="GyroSumStaticSquareErrorLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/GyroSquareErrorContainer/MarginContainer/VBoxContainer/SumSquareErrorHBoxContainer/SumStaticSquareErrorContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "10.00E-13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AcceSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_ny10e")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_ny10e")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="TypeLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "UNIVERSAL_LABEL_ACCE_SQUARE_ERROR"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AcceMotionFlagColorRect" type="ColorRect" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(26, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+color = Color(0, 1, 0.66666675, 1)
+
+[node name="XSquareErrorHBoxContainer" type="HBoxContainer" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="XLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/XSquareErrorHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="XSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/XSquareErrorHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="AcceXSquareErrorLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/XSquareErrorHBoxContainer/XSquareErrorContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "10.00E-13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="XStaticSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/XSquareErrorHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="AcceXStaticSquareErrorLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/XSquareErrorHBoxContainer/XStaticSquareErrorContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "10.00E-13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YSquareErrorHBoxContainer" type="HBoxContainer" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="YLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/YSquareErrorHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Y"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/YSquareErrorHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="AcceYSquareErrorLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/YSquareErrorHBoxContainer/YSquareErrorContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "10.00E-13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YStaticSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/YSquareErrorHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="AcceYStaticSquareErrorLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/YSquareErrorHBoxContainer/YStaticSquareErrorContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "10.00E-13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ZSquareErrorHBoxContainer" type="HBoxContainer" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="ZLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/ZSquareErrorHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ZSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/ZSquareErrorHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="AcceZSquareErrorLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/ZSquareErrorHBoxContainer/ZSquareErrorContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "10.00E-13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ZStaticSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/ZSquareErrorHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="AcceZStaticSquareErrorLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/ZSquareErrorHBoxContainer/ZStaticSquareErrorContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "10.00E-13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SumSquareErrorHBoxContainer" type="HBoxContainer" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="SumLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/SumSquareErrorHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "UNIVERSAL_LABEL_SUM"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SumSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/SumSquareErrorHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="AcceSumSquareErrorLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/SumSquareErrorHBoxContainer/SumSquareErrorContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "10.00E-13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SumStaticSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/SumSquareErrorHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="AcceSumStaticSquareErrorLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/AcceSquareErrorContainer/MarginContainer/VBoxContainer/SumSquareErrorHBoxContainer/SumStaticSquareErrorContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "10.00E-13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MagSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_ny10e")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_ny10e")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="TypeLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "UNIVERSAL_LABEL_MAG_SQUARE_ERROR"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MagMotionFlagColorRect" type="ColorRect" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(26, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+color = Color(0, 1, 0.66666675, 1)
+
+[node name="XSquareErrorHBoxContainer" type="HBoxContainer" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="XLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/XSquareErrorHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="XSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/XSquareErrorHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="MagXSquareErrorLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/XSquareErrorHBoxContainer/XSquareErrorContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "10.00E-13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="XStaticSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/XSquareErrorHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="MagXStaticSquareErrorLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/XSquareErrorHBoxContainer/XStaticSquareErrorContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "10.00E-13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YSquareErrorHBoxContainer" type="HBoxContainer" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="YLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/YSquareErrorHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Y"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/YSquareErrorHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="MagYSquareErrorLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/YSquareErrorHBoxContainer/YSquareErrorContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "10.00E-13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YStaticSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/YSquareErrorHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="MagYStaticSquareErrorLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/YSquareErrorHBoxContainer/YStaticSquareErrorContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "10.00E-13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ZSquareErrorHBoxContainer" type="HBoxContainer" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="ZLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/ZSquareErrorHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ZSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/ZSquareErrorHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="MagZSquareErrorLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/ZSquareErrorHBoxContainer/ZSquareErrorContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "10.00E-13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ZStaticSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/ZSquareErrorHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="MagZStaticSquareErrorLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/ZSquareErrorHBoxContainer/ZStaticSquareErrorContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "10.00E-13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SumSquareErrorHBoxContainer" type="HBoxContainer" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="SumLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/SumSquareErrorHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "UNIVERSAL_LABEL_SUM"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SumSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/SumSquareErrorHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="MagSumSquareErrorLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/SumSquareErrorHBoxContainer/SumSquareErrorContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "10.00E-13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SumStaticSquareErrorContainer" type="PanelContainer" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/SumSquareErrorHBoxContainer"]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny10e")
+
+[node name="MagSumStaticSquareErrorLabel" type="Label" parent="MarginContainer/SquareErrorVBoxContainer/MagSquareErrorContainer/MarginContainer/VBoxContainer/SumSquareErrorHBoxContainer/SumStaticSquareErrorContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "10.00E-13"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressContainer" type="PanelContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(600, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+mouse_filter = 2
+theme = ExtResource("2_ny10e")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ProgressContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ProgressContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="MarginContainer/ProgressContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "UNIVERSAL_LABEL_CALIBRATION_PROGRESS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CalibrationProgressBar" type="ProgressBar" parent="MarginContainer/ProgressContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(600, 26)
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_ny10e")
+step = 0.1
+value = 50.0
+show_percentage = false
+
+[node name="HintPanelContainer" type="PanelContainer" parent="MarginContainer"]
+visible = false
+custom_minimum_size = Vector2(840, 420)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = ExtResource("2_ny10e")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HintPanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 24
+
+[node name="HintLabel" type="Label" parent="MarginContainer/HintPanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(640, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 36
+text = "CALIBRATION_HINT_BEFORE_PRE_SAMPLING"
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="EnterButton" type="Button" parent="MarginContainer/HintPanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(180, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme = ExtResource("2_ny10e")
+text = "UNIVERSAL_LABEL_ENTER"

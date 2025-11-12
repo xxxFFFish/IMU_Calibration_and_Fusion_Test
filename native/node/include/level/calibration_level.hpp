@@ -27,8 +27,9 @@ public:
         MOTION_SAMPLING,
         STATIC_SAMPLING,
         STATIC_SAMPLING_END,
-        AWAIT_RESULT,
         SAMPLING_END,
+        AWAIT_RESULT,
+        CALIBRATION_END,
     };
 
 protected:
