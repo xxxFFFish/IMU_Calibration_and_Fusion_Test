@@ -3,7 +3,7 @@
 #include <godot_cpp/classes/scene_state.hpp>
 
 #include "macro_utility.h"
-#include "type/level_type.h"
+#include "type/data_type.h"
 
 #include "level/main_level.hpp"
 #include "level/calibration_level.hpp"
