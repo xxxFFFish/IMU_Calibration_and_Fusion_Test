@@ -1,5 +1,7 @@
 #include "manager/data_manager.hpp"
 
+#include "macro_utility.h"
+
 using namespace godot;
 using namespace framework;
 
@@ -8,29 +10,21 @@ using namespace framework;
 DataManager *DataManager::p_instance = nullptr;
 
 DataManager *DataManager::get_instance() {
-    if (p_instance == nullptr) {
-        print_error(TAG"Instance is empty!");
-    }
-
-    return p_instance;
+    RETURN_INSTANCE()
 }
 
 void DataManager::_bind_methods() {}
 
 DataManager::DataManager() {
-    if (p_instance == nullptr) {
-        p_instance = this;
-    } else {
-        print_error(TAG"Instance was created!");
-    }
+    INIT_INSTANCE()
 
-    mp_process_data.start_mode = EStartMode::MAIN;
-    mp_process_data.next_level = ELevel::MAIN;
-    mp_process_data.current_level = ELevel::MAIN;
-    mp_process_data.quit_code = 0;
+    m_process_data.start_mode = EStartMode::MAIN;
+    m_process_data.next_level = ELevel::MAIN;
+    m_process_data.current_level = ELevel::MAIN;
+    m_process_data.quit_code = 0;
 
-    mp_user_config_data.window_mode = EWindowMode::WINDOWED;
-    mp_user_config_data.fov = 45.0f;
+    m_user_config_data.window_mode = EWindowMode::WINDOWED;
+    m_user_config_data.fov = 45.0f;
 
     print_verbose(TAG"Created.");
 }

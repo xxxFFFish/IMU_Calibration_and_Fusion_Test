@@ -13,24 +13,17 @@ class FsmProgram;
 
 namespace framework {
 struct ProcessData;
+struct CalibrationLevelData;
 } // namespace framework
+
+namespace middleware {
+struct CalibrationMonitorData;
+struct CalibrationSamplingData;
+struct CalibrationResultData;
+} // namespace middleware
 
 class CalibrationLevel : public Node {
     GDCLASS(CalibrationLevel, Node)
-
-public:
-    enum class ECalibrationFsmStatus : int {
-        ERROR = -1,
-        IDLE,
-        PRE_SAMPLING,
-        PRE_SAMPLING_END,
-        MOTION_SAMPLING,
-        STATIC_SAMPLING,
-        STATIC_SAMPLING_END,
-        SAMPLING_END,
-        AWAIT_RESULT,
-        CALIBRATION_END,
-    };
 
 protected:
     static void _bind_methods();
@@ -45,8 +38,14 @@ public:
 
 private:
     framework::ProcessData *mp_process_data = nullptr;
+    framework::CalibrationLevelData *mp_calibration_level_data = nullptr;
 
     Ref<FsmProgram> m_fsm_program;
+
+    // Shared data
+    const middleware::CalibrationMonitorData *mp_calibration_monitor_data = nullptr;
+    const middleware::CalibrationSamplingData *mp_calibration_sampling_data = nullptr;
+    const middleware::CalibrationResultData *mp_calibration_result_data = nullptr;
 
     void register_fsm_status();
 };

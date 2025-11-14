@@ -29,18 +29,23 @@ public:
     void _exit_tree() override;
 
 private:
-    ProcessData mp_process_data;
-    UserConfigData mp_user_config_data;
+    ProcessData m_process_data;
+    UserConfigData m_user_config_data;
+
+    CalibrationLevelData m_calibration_level_data;
 
 public:
     void init();
     void deinit();
 
-    const ProcessData *get_process_data() const { return &mp_process_data; }
-    ProcessData *own_process_data() { return &mp_process_data; }
+    const ProcessData *get_process_data() const { return &m_process_data; }
+    ProcessData *own_process_data() { return &m_process_data; }
 
-    const UserConfigData *get_user_config_data() const { return &mp_user_config_data; }
-    UserConfigData *own_user_config_data() { return &mp_user_config_data; }
+    const UserConfigData *get_user_config_data() const { return &m_user_config_data; }
+    UserConfigData *own_user_config_data() { return &m_user_config_data; }
+
+    const CalibrationLevelData *get_calibration_level_data() const { return &m_calibration_level_data; }
+    CalibrationLevelData *own_calibration_level_data() { return &m_calibration_level_data; }
 };
 
 } // namespace framework

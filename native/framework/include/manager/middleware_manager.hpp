@@ -5,6 +5,8 @@
 
 #include "type/middleware_type.h"
 
+#include "calibration_shared_data.h"
+
 namespace godot {
 
 class Thread;
@@ -15,12 +17,10 @@ class MiddlewareManager : public Node {
     GDCLASS(MiddlewareManager, Node)
 
 private:
-    struct ProcessHandle {
-        EMiddleware type;
-
+    struct CalibrationProcessHandle {
         String shared_data_name;
         size_t shared_data_size;
-        void *p_map_file_handle{nullptr};
+        void *p_file_mapping_handle{nullptr};
         void *p_shared_data_buffer{nullptr};
 
         uint16_t last_sub_process_command_id;
@@ -56,33 +56,35 @@ private:
 
     bool m_enabled = false;
 
-    ProcessHandle m_calibration_process_handle;
-    ProcessHandle m_fusion_process_handle;
+    CalibrationProcessHandle m_calibration_process_handle;
 
     String get_process_executable_file_path(EMiddleware object);
 
-    Error create_shared_data(ProcessHandle *p_process_handle);
-    void release_shared_data(ProcessHandle *p_process_handle);
+    // Calibration functions
+    Error create_calibration_shared_data();
+    void release_calibration_shared_data();
 
-    void init_shared_data_process_command(ProcessHandle *p_process_handle);
-    void send_shared_data_process_command(ProcessHandle *p_process_handle, uint8_t type, uint8_t command);
-    void send_response(ProcessHandle *p_process_handle);
+    void send_calibration_process_command(uint8_t type, uint8_t command);
+    void send_calibration_response();
 
-    void listen_sub_process_command(ProcessHandle *p_process_handle);
+    void listen_calibration_sub_process_command();
 
     void calibration_sub_process_command_parser();
     void calibration_monitor_task();
 
-    void fusion_sub_process_command_parser();
-    void fusion_monitor_task();
+    Error run_calibration();
 
 public:
     void init();
     void deinit();
 
     Error run(EMiddleware object);
-    void stop(EMiddleware object);
+    void release(EMiddleware object);
     bool is_running(EMiddleware object);
+
+    const middleware::CalibrationMonitorData *get_calibration_monitor_data();
+    const middleware::CalibrationSamplingData *get_calibration_sampling_data();
+    const middleware::CalibrationResultData *get_calibration_result_data();
 };
 
 } // namespace framework

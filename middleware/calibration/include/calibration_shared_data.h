@@ -1,7 +1,7 @@
 #ifndef __CALIBRATION_SHARED_DATA_H
 #define __CALIBRATION_SHARED_DATA_H
 
-#include "process_command.h"
+#include <stdint.h>
 
 #define CALIBRATION_SHARED_DATA_NAME "CalibrationSharedData"
 #define CALIBRATION_GYRO_TARGET_SAMPLING_QUANTITY (24)
@@ -10,8 +10,18 @@
 #define CALIBRATION_MAG_MAX_MOTION_SAMPLING_QUANTITY (2400)
 
 namespace middleware {
+enum class EProcessCommandType : uint8_t {
+    EXIT = 0,
+    RESPONSE,
+};
 
 #pragma pack(push, 1)
+struct CalibrationProcessCommand {
+    uint16_t id{0};
+    uint8_t type{0};
+    uint8_t command{0};
+};
+
 struct CalibrationMonitorData {
     // Gyro
     int32_t gyro_raw_data[3];
@@ -42,6 +52,7 @@ struct CalibrationMonitorData {
     double mag_square_error[4];
     int32_t mag_static_motion_flag;
 
+    uint32_t mag_motion_sampling_filter_count;
     double mag_optimizer_error;
 };
 
@@ -74,8 +85,8 @@ struct CalibrationResultData {
 };
 
 struct CalibrationSharedData {
-    ProcessCommand main_process_command;
-    ProcessCommand sub_process_command;
+    CalibrationProcessCommand main_process_command;
+    CalibrationProcessCommand sub_process_command;
     CalibrationMonitorData monitor_data;
     CalibrationSamplingData sampling_data;
     CalibrationResultData result_data;

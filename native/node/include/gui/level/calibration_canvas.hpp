@@ -12,7 +12,7 @@ class PanelContainer;
 class Button;
 
 namespace framework {
-struct ImuReceiverData;
+struct CalibrationLevelData;
 } // namespace framework
 
 class CalibrationCanvas : public CanvasLayer {
@@ -51,34 +51,34 @@ private:
     Label *mp_mag_motion_count_label = nullptr;
 
     ColorRect *mp_gyro_motion_flag_color_rect = nullptr;
-    Label *mp_gyro_x_square_error = nullptr;
-    Label *mp_gyro_y_square_error = nullptr;
-    Label *mp_gyro_z_square_error = nullptr;
-    Label *mp_gyro_sum_square_error = nullptr;
-    Label *mp_gyro_x_static_square_error = nullptr;
-    Label *mp_gyro_y_static_square_error = nullptr;
-    Label *mp_gyro_z_static_square_error = nullptr;
-    Label *mp_gyro_sum_static_square_error = nullptr;
+    Label *mp_gyro_x_square_error_label = nullptr;
+    Label *mp_gyro_y_square_error_label = nullptr;
+    Label *mp_gyro_z_square_error_label = nullptr;
+    Label *mp_gyro_sum_square_error_label = nullptr;
+    Label *mp_gyro_x_static_square_error_label = nullptr;
+    Label *mp_gyro_y_static_square_error_label = nullptr;
+    Label *mp_gyro_z_static_square_error_label = nullptr;
+    Label *mp_gyro_sum_static_square_error_label = nullptr;
 
     ColorRect *mp_acce_motion_flag_color_rect = nullptr;
-    Label *mp_acce_x_square_error = nullptr;
-    Label *mp_acce_y_square_error = nullptr;
-    Label *mp_acce_z_square_error = nullptr;
-    Label *mp_acce_sum_square_error = nullptr;
-    Label *mp_acce_x_static_square_error = nullptr;
-    Label *mp_acce_y_static_square_error = nullptr;
-    Label *mp_acce_z_static_square_error = nullptr;
-    Label *mp_acce_sum_static_square_error = nullptr;
+    Label *mp_acce_x_square_error_label = nullptr;
+    Label *mp_acce_y_square_error_label = nullptr;
+    Label *mp_acce_z_square_error_label = nullptr;
+    Label *mp_acce_sum_square_error_label = nullptr;
+    Label *mp_acce_x_static_square_error_label = nullptr;
+    Label *mp_acce_y_static_square_error_label = nullptr;
+    Label *mp_acce_z_static_square_error_label = nullptr;
+    Label *mp_acce_sum_static_square_error_label = nullptr;
 
     ColorRect *mp_mag_motion_flag_color_rect = nullptr;
-    Label *mp_mag_x_square_error = nullptr;
-    Label *mp_mag_y_square_error = nullptr;
-    Label *mp_mag_z_square_error = nullptr;
-    Label *mp_mag_sum_square_error = nullptr;
-    Label *mp_mag_x_static_square_error = nullptr;
-    Label *mp_mag_y_static_square_error = nullptr;
-    Label *mp_mag_z_static_square_error = nullptr;
-    Label *mp_mag_sum_static_square_error = nullptr;
+    Label *mp_mag_x_square_error_label = nullptr;
+    Label *mp_mag_y_square_error_label = nullptr;
+    Label *mp_mag_z_square_error_label = nullptr;
+    Label *mp_mag_sum_square_error_label = nullptr;
+    Label *mp_mag_x_static_square_error_label = nullptr;
+    Label *mp_mag_y_static_square_error_label = nullptr;
+    Label *mp_mag_z_static_square_error_label = nullptr;
+    Label *mp_mag_sum_static_square_error_label = nullptr;
 
     ProgressBar *mp_calibration_progress_bar = nullptr;
 
@@ -91,6 +91,17 @@ private:
     PanelContainer *mp_hint_panel_container = nullptr;
     Label *mp_hint_label = nullptr;
     Button *mp_enter_button = nullptr;
+
+    const framework::CalibrationLevelData *mp_calibration_level_data = nullptr;
+
+    void update_status();
+    void update_gyro_data();
+    void update_gyro_square_error();
+    void update_acce_data();
+    void update_acce_square_error();
+    void update_mag_data();
+    void update_mag_square_error();
+    void update_calibration_progress();
 
     // Signal handler
     void on_enter_button_pressed();

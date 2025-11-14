@@ -24,11 +24,30 @@ void CalibrationLevel::_ready() {
 
     // Get data point
     mp_process_data = framework::DataManager::get_instance()->own_process_data();
+    mp_calibration_level_data = framework::DataManager::get_instance()->own_calibration_level_data();
 
     // Connect framework signal
 
     // Start middleware process
-    if (framework::MiddlewareManager::get_instance()->run(framework::EMiddleware::CALIBRATION) != Error::OK) {
+    if (framework::MiddlewareManager::get_instance()->run(framework::EMiddleware::CALIBRATION) == Error::OK) {
+        mp_calibration_monitor_data = framework::MiddlewareManager::get_instance()->get_calibration_monitor_data();
+        if (mp_calibration_monitor_data == nullptr) {
+            print_error(TAG"Get calibration monitor data failed!");
+            return;
+        }
+
+        mp_calibration_sampling_data = framework::MiddlewareManager::get_instance()->get_calibration_sampling_data();
+        if (mp_calibration_sampling_data == nullptr) {
+            print_error(TAG"Get calibration sampling data failed!");
+            return;
+        }
+
+        mp_calibration_result_data = framework::MiddlewareManager::get_instance()->get_calibration_result_data();
+        if (mp_calibration_result_data == nullptr) {
+            print_error(TAG"Get calibration result data failed!");
+            return;
+        }
+    } else {
         print_error(TAG"Run middleware process failed!");
     }
 
@@ -37,16 +56,14 @@ void CalibrationLevel::_ready() {
 
     register_fsm_status();
 
-    m_fsm_program->start((int)ECalibrationFsmStatus::IDLE);
+    m_fsm_program->start((int)framework::ECalibrationStatus::IDLE);
 
     print_verbose(TAG"Ready.");
 }
 
 void CalibrationLevel::_exit_tree() {
     // Stop middleware process
-    if (framework::MiddlewareManager::get_instance()->is_running(framework::EMiddleware::CALIBRATION)) {
-        framework::MiddlewareManager::get_instance()->stop(framework::EMiddleware::CALIBRATION);
-    }
+    framework::MiddlewareManager::get_instance()->release(framework::EMiddleware::CALIBRATION);
 
     // Disconnect framework signal
 
@@ -59,7 +76,7 @@ void CalibrationLevel::_process(double delta) {
 
 void CalibrationLevel::register_fsm_status() {
     m_fsm_program->register_status(
-        (int)ECalibrationFsmStatus::IDLE,
+        (int)framework::ECalibrationStatus::IDLE,
         [this]() { // Enter action
             print_verbose(TAG"Enter IDLE");
         },
@@ -70,12 +87,12 @@ void CalibrationLevel::register_fsm_status() {
             
         },
         [this]() { // Next status
-            return (int)ECalibrationFsmStatus::IDLE;
+            return (int)framework::ECalibrationStatus::IDLE;
         }
     );
 
     m_fsm_program->register_status(
-        (int)ECalibrationFsmStatus::PRE_SAMPLING,
+        (int)framework::ECalibrationStatus::PRE_SAMPLING,
         [this]() { // Enter action
             print_verbose(TAG"Enter PRE_SAMPLING");
         },
@@ -86,12 +103,12 @@ void CalibrationLevel::register_fsm_status() {
             
         },
         [this]() { // Next status
-            return (int)ECalibrationFsmStatus::PRE_SAMPLING;
+            return (int)framework::ECalibrationStatus::PRE_SAMPLING;
         }
     );
 
     m_fsm_program->register_status(
-        (int)ECalibrationFsmStatus::PRE_SAMPLING_END,
+        (int)framework::ECalibrationStatus::PRE_SAMPLING_END,
         [this]() { // Enter action
             print_verbose(TAG"Enter PRE_SAMPLING_END");
         },
@@ -102,7 +119,7 @@ void CalibrationLevel::register_fsm_status() {
             
         },
         [this]() { // Next status
-            return (int)ECalibrationFsmStatus::PRE_SAMPLING_END;
+            return (int)framework::ECalibrationStatus::PRE_SAMPLING_END;
         }
     );
 }
