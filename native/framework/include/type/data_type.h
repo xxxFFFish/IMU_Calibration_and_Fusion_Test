@@ -20,12 +20,12 @@ enum class ELevel : int32_t {
 };
 
 struct ProcessData {
-    EStartMode start_mode;
+    EStartMode start_mode{EStartMode::MAIN};
 
-    ELevel next_level;
-    ELevel current_level;
+    ELevel next_level{ELevel::MAIN};
+    ELevel current_level{ELevel::MAIN};
 
-    int quit_code;
+    int quit_code{0};
 };
 
 enum class EWindowMode : int8_t {
@@ -35,8 +35,8 @@ enum class EWindowMode : int8_t {
 };
 
 struct UserConfigData {
-    EWindowMode window_mode;
-    float fov;
+    EWindowMode window_mode{EWindowMode::WINDOWED};
+    float fov{45.0f};
 };
 
 enum class ECalibrationStatus : int8_t {
@@ -53,45 +53,45 @@ enum class ECalibrationStatus : int8_t {
 };
 
 struct CalibrationLevelData {
-    ECalibrationStatus calibration_status;
+    ECalibrationStatus calibration_status{ECalibrationStatus::IDLE};
 
     // Gyro
-    int32_t gyro_raw_data[3];
-    uint32_t gyro_sampling_count;
-    uint32_t gyro_target_sampling_quantity;
+    int32_t gyro_raw_data[3]{};
+    uint32_t gyro_sampling_count{0};
+    uint32_t gyro_target_sampling_quantity{0};
 
-    float gyro_static_square_error[4];
-    float gyro_square_error[4];
-    bool gyro_static_motion_flag;
+    float gyro_static_square_error[4]{};
+    float gyro_square_error[4]{};
+    bool gyro_static_motion_flag{false};
 
-    float gyro_optimizer_error;
+    float gyro_optimizer_error{0.0f};
 
     // Acce
-    int32_t acce_raw_data[3];
-    uint32_t acce_sampling_count;
-    uint32_t acce_target_sampling_quantity;
+    int32_t acce_raw_data[3]{};
+    uint32_t acce_sampling_count{0};
+    uint32_t acce_target_sampling_quantity{0};
 
-    float acce_static_square_error[4];
-    float acce_square_error[4];
-    bool acce_static_motion_flag;
+    float acce_static_square_error[4]{};
+    float acce_square_error[4]{};
+    bool acce_static_motion_flag{false};
 
-    float acce_optimizer_error;
+    float acce_optimizer_error{0.0f};
 
     // Mag
-    int16_t mag_raw_data[3];
-    uint32_t mag_static_sampling_count;
-    uint32_t mag_target_static_sampling_quantity;
-    uint32_t mag_motion_sampling_count;
-    uint32_t mag_target_motion_sampling_quantity;
+    int16_t mag_raw_data[3]{};
+    uint32_t mag_static_sampling_count{0};
+    uint32_t mag_target_static_sampling_quantity{0};
+    uint32_t mag_motion_sampling_count{0};
+    uint32_t mag_target_motion_sampling_quantity{0};
 
-    float mag_static_square_error[4];
-    float mag_square_error[4];
-    bool mag_static_motion_flag;
+    float mag_static_square_error[4]{};
+    float mag_square_error[4]{};
+    bool mag_static_motion_flag{false};
 
-    float mag_optimizer_error;
+    float mag_optimizer_error{0.0f};
 
     // Progress
-    float calibration_progress;
+    float calibration_progress{0.0f};
 };
 
 } //namespace framework

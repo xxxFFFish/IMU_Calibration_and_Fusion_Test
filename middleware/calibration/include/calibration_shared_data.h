@@ -24,64 +24,64 @@ struct CalibrationProcessCommand {
 
 struct CalibrationMonitorData {
     // Gyro
-    int32_t gyro_raw_data[3];
-    uint32_t gyro_sampling_count;
+    int32_t gyro_raw_data[3]{};
+    uint32_t gyro_sampling_count{0};
 
-    double gyro_static_square_error[4];
-    double gyro_square_error[4];
-    int32_t gyro_static_motion_flag;
+    double gyro_static_square_error[4]{};
+    double gyro_square_error[4]{};
+    int32_t gyro_static_motion_flag{0};
 
-    double gyro_optimizer_error;
+    double gyro_optimizer_error{0.0};
 
     // Acce
-    int32_t acce_raw_data[3];
-    uint32_t acce_sampling_count;
+    int32_t acce_raw_data[3]{};
+    uint32_t acce_sampling_count{0};
 
-    double acce_static_square_error[4];
-    double acce_square_error[4];
-    int32_t acce_static_motion_flag;
+    double acce_static_square_error[4]{};
+    double acce_square_error[4]{};
+    int32_t acce_static_motion_flag{0};
 
-    double acce_optimizer_error;
+    double acce_optimizer_error{0.0};
 
     // Mag
-    int16_t mag_raw_data[3];
-    uint32_t mag_static_sampling_count;
-    uint32_t mag_motion_sampling_count;
+    int16_t mag_raw_data[3]{};
+    uint32_t mag_static_sampling_count{0};
+    uint32_t mag_motion_sampling_count{0};
 
-    double mag_static_square_error[4];
-    double mag_square_error[4];
-    int32_t mag_static_motion_flag;
+    double mag_static_square_error[4]{};
+    double mag_square_error[4]{};
+    int32_t mag_static_motion_flag{0};
 
-    uint32_t mag_motion_sampling_filter_count;
-    double mag_optimizer_error;
+    uint32_t mag_motion_sampling_filter_count{0};
+    double mag_optimizer_error{0.0};
 };
 
 struct CalibrationSamplingData {
-    uint32_t gyro_target_sampling_quantity;
-    double gyro_sampling_buffer[CALIBRATION_GYRO_TARGET_SAMPLING_QUANTITY][3];
+    uint32_t gyro_target_sampling_quantity{0};
+    double gyro_sampling_buffer[CALIBRATION_GYRO_TARGET_SAMPLING_QUANTITY][3]{};
 
-    uint32_t acce_target_sampling_quantity;
-    double acce_sampling_buffer[CALIBRATION_ACCE_TARGET_SAMPLING_QUANTITY][3];
+    uint32_t acce_target_sampling_quantity{0};
+    double acce_sampling_buffer[CALIBRATION_ACCE_TARGET_SAMPLING_QUANTITY][3]{};
 
-    uint32_t mag_target_static_sampling_quantity;
-    double mag_static_sampling_buffer[CALIBRATION_MAG_TARGET_STATIC_SAMPLING_QUANTITY][3];
+    uint32_t mag_target_static_sampling_quantity{0};
+    double mag_static_sampling_buffer[CALIBRATION_MAG_TARGET_STATIC_SAMPLING_QUANTITY][3]{};
 
-    uint32_t mag_target_motion_sampling_quantity;
-    int16_t mag_motion_sampling_buffer[CALIBRATION_MAG_MAX_MOTION_SAMPLING_QUANTITY][3];
+    uint32_t mag_target_motion_sampling_quantity{0};
+    int16_t mag_motion_sampling_buffer[CALIBRATION_MAG_MAX_MOTION_SAMPLING_QUANTITY][3]{};
 };
 
 struct CalibrationResultData {
-    float gyro_bias[3];
-    float gyro_axis_matrix[9];
-    float gyro_rotation_matrix[9];
+    float gyro_bias[3]{};
+    float gyro_axis_matrix[9]{1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f};
+    float gyro_rotation_matrix[9]{1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f};
     
-    float acce_bias[3];
-    float acce_axis_matrix[9];
-    float acce_rotation_matrix[9];
+    float acce_bias[3]{};
+    float acce_axis_matrix[9]{1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f};
+    float acce_rotation_matrix[9]{1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f};
 
-    float mag_bias[3];
-    float mag_axis_matrix[9];
-    float mag_rotation_matrix[9];
+    float mag_bias[3]{};
+    float mag_axis_matrix[9]{1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f};
+    float mag_rotation_matrix[9]{1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f};
 };
 
 struct CalibrationSharedData {

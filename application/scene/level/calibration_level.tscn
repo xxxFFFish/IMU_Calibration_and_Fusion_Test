@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgy1qw1bx8sxi"]
+[gd_scene load_steps=5 format=3 uid="uid://cgy1qw1bx8sxi"]
 
 [ext_resource type="PackedScene" uid="uid://cf68q7igfosjj" path="res://scene/gui/level/calibration_canvas.tscn" id="1_h375v"]
+[ext_resource type="Script" uid="uid://cojjqv4fjg6je" path="res://script/level/calibration_level.gd" id="1_vxjsh"]
 
 [sub_resource type="Environment" id="Environment_h375v"]
 ambient_light_source = 1
@@ -9,7 +10,9 @@ reflected_light_source = 1
 [sub_resource type="BoxMesh" id="BoxMesh_vxjsh"]
 size = Vector3(0.3, 0.3, 0.3)
 
-[node name="CalibrationLevel" type="CalibrationLevel"]
+[node name="CalibrationLevel" type="CalibrationLevel" node_paths=PackedStringArray("calibration_canvas")]
+script = ExtResource("1_vxjsh")
+calibration_canvas = NodePath("CalibrationCanvas")
 
 [node name="CalibrationCanvas" parent="." instance=ExtResource("1_h375v")]
 

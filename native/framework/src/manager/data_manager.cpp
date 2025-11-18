@@ -17,15 +17,6 @@ void DataManager::_bind_methods() {}
 
 DataManager::DataManager() {
     INIT_INSTANCE()
-
-    m_process_data.start_mode = EStartMode::MAIN;
-    m_process_data.next_level = ELevel::MAIN;
-    m_process_data.current_level = ELevel::MAIN;
-    m_process_data.quit_code = 0;
-
-    m_user_config_data.window_mode = EWindowMode::WINDOWED;
-    m_user_config_data.fov = 45.0f;
-
     print_verbose(TAG"Created.");
 }
 

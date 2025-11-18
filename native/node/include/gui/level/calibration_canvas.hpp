@@ -105,6 +105,9 @@ private:
 
     // Signal handler
     void on_enter_button_pressed();
+
+public:
+    void show_hint_panel(const String &hint);
 };
 
 } // namespace godot

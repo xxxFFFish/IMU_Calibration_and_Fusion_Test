@@ -12,6 +12,7 @@
 
 #include "manager/data_manager.hpp"
 #include "manager/text_manager.hpp"
+#include "manager/signal_manager.hpp"
 
 using namespace godot;
 
@@ -326,4 +327,13 @@ void CalibrationCanvas::update_calibration_progress() {
 
 void CalibrationCanvas::on_enter_button_pressed() {
     print_verbose(TAG"On signal enter button pressed.");
+
+    framework::SignalManager::get_instance()->signal_emit(framework::ESignal::CALIBRATION_HINT_ENTER);
+
+    mp_hint_panel_container->set_visible(false);
+}
+
+void CalibrationCanvas::show_hint_panel(const String &hint) {
+    mp_hint_label->set_text(hint);
+    mp_hint_panel_container->set_visible(true);
 }
